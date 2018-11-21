@@ -1,0 +1,33 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion '28.0.2'
+
+    defaultConfig {
+        applicationId "com.smartadserver.android.sassample"
+        minSdkVersion 19
+        targetSdkVersion 28
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation 'com.android.support:appcompat-v7:28+'
+    implementation 'com.android.support:design:28+'
+    implementation 'com.google.android.gms:play-services-ads:16.0.0'
+    implementation 'com.google.android.gms:play-services-location:+'
+
+    // Smart display SDK
+    implementation 'com.smartadserver.android:smart-display-sdk:7.0.0@aar'
+
+    // OkHttp required by smart SDK
+    implementation 'com.squareup.okhttp3:okhttp:3.7.0'
+
+}
