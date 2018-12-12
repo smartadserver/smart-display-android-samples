@@ -1,4 +1,4 @@
-# Smart AdServer — Android Instream SDK Samples
+# Smart AdServer — Android Display SDK Samples
 
 This repository contains sample applications demonstrating how to integrate the various ad formats provided by the _Smart Android Display SDK_.
 
