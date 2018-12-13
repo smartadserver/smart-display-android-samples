@@ -21,13 +21,13 @@ android {
 dependencies {
     implementation 'com.android.support:appcompat-v7:28+'
     implementation 'com.android.support:design:28+'
-    implementation 'com.google.android.gms:play-services-ads:16.0.0'
-    implementation 'com.google.android.gms:play-services-location:+'
+    implementation 'com.google.android.gms:play-services-ads-identifier:16.0.0'
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
 
     // Smart display SDK
-    implementation 'com.smartadserver.android:smart-display-sdk:7.0.0@aar'
+    implementation 'com.smartadserver.android:smart-display-sdk:7.0.1@aar'
 
     // OkHttp required by smart SDK
-    implementation 'com.squareup.okhttp3:okhttp:3.7.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.0'
 
 }
