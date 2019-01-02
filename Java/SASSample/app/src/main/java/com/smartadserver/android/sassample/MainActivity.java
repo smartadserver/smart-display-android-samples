@@ -96,16 +96,15 @@ public class MainActivity extends AppCompatActivity {
         /**
          * GDPR Binary Consent Status manual setting.
          *
-         * Some third party mediation SDKs are not IAB compliant concerning the consent string. Generally, those SDKs do take into account the IAB consent string,
-         * but only a binary consent about the advertising purpose.
-         * To retrieve this binary consent, you can use the method "SASConfiguration.getSharedInstance().getGDPRConsentStatus()", that is what our official adapters do.
-         * This method retrieves the binary consent from the SharedPreferences using the key "Smart_advertisingConsentStatus".
-         *
-         * By uncommenting the following code, you will set the GDPR Binary consent status manually.
+         * Some third party mediation SDKs are not IAB compliant concerning the consent string. Those SDK use
+         * most of the time a binary consent for the advertising purpose.
+         * If you are using one or more of those SDK through Smart mediation, you can set this binary consent for
+         * all adapters at once by setting the string '1' (if the consent is granted) or '0' (if the consent is denied)
+         * in the SharedPreferences for the key 'Smart_advertisingConsentStatus'.
          */
         // SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         // SharedPreferences.Editor editor = prefs.edit();
-        // editor.putString("Smart_advertisingConsentStatus", "1"); // "1" for advertising purpose accepted, "0" for advertising purpose revoked, null if undefined
+        // editor.putString("Smart_advertisingConsentStatus", "1" or "0");
         // editor.apply();
     }
 
