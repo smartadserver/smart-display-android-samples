@@ -1,7 +1,9 @@
 package com.smartadserver.android.sassample;
 
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -81,15 +83,29 @@ public class MainActivity extends AppCompatActivity {
          * GDPR Consent String manual setting.
          *
          * By uncommenting the following code, you will set the GDPR consent string manually.
-         * Note: the Smart Display SDK will use retrieve the consent string from the SharedPreferences using the official IAB key "IABConsent_ConsentString".
-         * If using the SmartCMP SDK, you will not have to do this because the SmartCMP already stores the consent string
-         * using the official key.
-         * If you are using any other CMP that do not store the consent string in the SharedPreferences using the official
+         * Note: the Smart Display SDK will retrieve the consent string from the SharedPreferences using the official IAB key "IABConsent_ConsentString".
+         *
+         * If you are using a CMP that does not store the consent string in the SharedPreferences using the official
          * IAB key, please store it yourself with the official key.
          */
         // SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         // SharedPreferences.Editor editor = prefs.edit();
         // editor.putString("IABConsent_ConsentString", "YourConsentString");
+        // editor.apply();
+
+        /**
+         * GDPR Binary Consent Status manual setting.
+         *
+         * Some third party mediation SDKs are not IAB compliant concerning the consent string. Generally, those SDKs do take into account the IAB consent string,
+         * but only a binary consent about the advertising purpose.
+         * To retrieve this binary consent, you can use the method "SASConfiguration.getSharedInstance().getGDPRConsentStatus()", that is what our official adapters do.
+         * This method retrieves the binary consent from the SharedPreferences using the key "Smart_advertisingConsentStatus".
+         *
+         * By uncommenting the following code, you will set the GDPR Binary consent status manually.
+         */
+        // SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        // SharedPreferences.Editor editor = prefs.edit();
+        // editor.putString("Smart_advertisingConsentStatus", "1"); // "1" for advertising purpose accepted, "0" for advertising purpose revoked, null if undefined
         // editor.apply();
     }
 
