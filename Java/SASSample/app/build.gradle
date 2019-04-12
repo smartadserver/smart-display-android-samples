@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
-    buildToolsVersion '28.0.2'
 
     defaultConfig {
         applicationId "com.smartadserver.android.sassample"
@@ -19,15 +18,16 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:appcompat-v7:28+'
-    implementation 'com.android.support:design:28+'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
     implementation 'com.google.android.gms:play-services-ads-identifier:16.0.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
 
     // Smart display SDK
-    implementation 'com.smartadserver.android:smart-display-sdk:7.0.3@aar'
+    implementation 'com.smartadserver.android:smart-display-sdk:7.0.4@aar'
 
     // OkHttp required by smart SDK
-    implementation 'com.squareup.okhttp3:okhttp:3.12.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.1'
 
 }
