@@ -25,9 +25,13 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:16.0.0'
 
     // Smart display SDK
-    implementation 'com.smartadserver.android:smart-display-sdk:7.0.5@aar'
+    implementation 'com.smartadserver.android:smart-core-sdk:7.1.0@aar'
+    implementation 'com.smartadserver.android:smart-display-sdk:7.1.0@aar'
 
     // OkHttp required by smart SDK
     implementation 'com.squareup.okhttp3:okhttp:3.12.1'
+
+    // exoplayer required by smart SDK
+    implementation 'com.google.android.exoplayer:exoplayer:2.8.3'
 
 }

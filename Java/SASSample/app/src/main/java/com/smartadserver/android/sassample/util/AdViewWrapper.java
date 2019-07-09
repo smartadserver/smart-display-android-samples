@@ -166,7 +166,6 @@ public class AdViewWrapper {
             ViewGroup vg = (ViewGroup)mHolder.itemView.findViewById(R.id.banner_container);
             vg.removeAllViews();
             vg.addView(mBanner);
-            mBanner.setPreDrawListenerEnabled(true);
             mBanner.post(new Runnable() {
                 @Override
                 public void run() {
