@@ -25,14 +25,14 @@
 
     <!-- Interstitial Activity -->
     <string name="title_activity_interstitial">Interstitial</string>
-    <string name="activity_interstitial_load_btn">LOAD INTERSTITIAL AD</string>
-    <string name="activity_interstitial_show_btn">SHOW INTERSTITIAL AD</string>
+    <string name="activity_interstitial_load_btn">LOAD INTERSTITIAL</string>
+    <string name="activity_interstitial_show_btn">SHOW INTERSTITIAL</string>
     <string name="activity_interstitial_instructions">Simple interstitial integration. Click the load button to load an interstitial ad, then click the show button to display it. See implementation in InterstitialActivity.</string>
 
     <!-- Rewarded Video Activity -->
     <string name="title_activity_rewarded_video">Rewarded Video</string>
-    <string name="activity_rewardedvideo_load_btn">LOAD AD</string>
-    <string name="activity_rewardedvideo_show_btn">SHOW AD</string>
+    <string name="activity_rewardedvideo_load_btn">LOAD REWARDED VIDEO</string>
+    <string name="activity_rewardedvideo_show_btn">SHOW REWARDED VIDEO</string>
     <string name="activity_rewardedvideo_instructions">Simple rewarded video integration. Click the load button to load a rewarded video ad, then click the show button to display it. See implementation in RewardedVideoActivity.</string>
 
     <!-- Recycler Activity -->

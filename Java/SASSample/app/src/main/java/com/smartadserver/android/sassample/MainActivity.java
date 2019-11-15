@@ -54,21 +54,27 @@ public class MainActivity extends AppCompatActivity {
                         startBannerActivity();
                         break;
                     case 2:
-                        startInterstitialActivity();
+                        startInAppBiddingBannerActivity();
                         break;
                     case 3:
-                        startRewardedVideoActivity();
+                        startInterstitialActivity();
                         break;
                     case 4:
-                        startRecyclerActivity();
+                        startInAppBiddingInterstitialActivity();
                         break;
                     case 5:
-                        startCoordinatorLayoutActivity();
+                        startRewardedVideoActivity();
                         break;
                     case 6:
-                        startNativeActivity(false);
+                        startRecyclerActivity();
                         break;
                     case 7:
+                        startCoordinatorLayoutActivity();
+                        break;
+                    case 8:
+                        startNativeActivity(false);
+                        break;
+                    case 9:
                         startNativeActivity(true);
                         break;
 
@@ -155,6 +161,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void startRewardedVideoActivity() {
         Intent intent = new Intent(this, RewardedVideoActivity.class);
+        startActivity(intent);
+    }
+
+    private void startInAppBiddingBannerActivity() {
+        Intent intent = new Intent(this, InAppBiddingBannerActivity.class);
+        startActivity(intent);
+    }
+
+    private void startInAppBiddingInterstitialActivity() {
+        Intent intent = new Intent(this, InAppBiddingInterstitialActivity.class);
         startActivity(intent);
     }
 

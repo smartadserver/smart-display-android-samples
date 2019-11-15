@@ -27,6 +27,14 @@
             android:label="@string/title_activity_banner"
             android:configChanges="screenSize|orientation" />
         <activity
+            android:name=".InAppBiddingBannerActivity"
+            android:label="@string/title_activity_inapp_bidding_banner"
+            android:configChanges="screenSize|orientation" />
+        <activity
+            android:name=".InAppBiddingInterstitialActivity"
+            android:label="@string/title_activity_inapp_bidding_interstitial"
+            android:configChanges="screenSize|orientation" />
+        <activity
             android:name=".InterstitialActivity"
             android:label="@string/title_activity_interstitial"
             android:configChanges="screenSize|orientation" />

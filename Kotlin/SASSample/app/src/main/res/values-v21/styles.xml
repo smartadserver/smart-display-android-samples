@@ -1,0 +1,20 @@
+<resources>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="CustomActionBarStyle" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">@color/actionBarBackground</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:elevation">0dp</item>
+        <item name="elevation">0dp</item>
+        <item name="titleTextStyle">@style/CustomTitleStyle</item>
+    </style>
+</resources>
