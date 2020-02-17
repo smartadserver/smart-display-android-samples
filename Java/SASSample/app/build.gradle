@@ -25,7 +25,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:16.0.0'
 
     // Smart display SDK
-    implementation 'com.smartadserver.android:smart-core-sdk:7.4.0@aar'
+    implementation 'com.smartadserver.android:smart-core-sdk:7.4.1@aar'
     implementation 'com.smartadserver.android:smart-display-sdk:7.4.0@aar'
 
     // OkHttp required by smart SDK
