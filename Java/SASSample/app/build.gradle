@@ -26,7 +26,8 @@ dependencies {
 
     // Smart display SDK
     implementation 'com.smartadserver.android:smart-core-sdk:7.4.1@aar'
-    implementation 'com.smartadserver.android:smart-display-sdk:7.4.0@aar'
+    implementation 'com.smartadserver.android:smart-display-sdk:7.4.1@aar'
+
 
     // OkHttp required by smart SDK
     implementation 'com.squareup.okhttp3:okhttp:3.12.1'
