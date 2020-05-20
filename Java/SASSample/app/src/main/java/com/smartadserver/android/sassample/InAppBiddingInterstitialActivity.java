@@ -1,8 +1,8 @@
 package com.smartadserver.android.sassample;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
@@ -26,8 +26,7 @@ public class InAppBiddingInterstitialActivity extends AppCompatActivity implemen
     private final static SASAdPlacement INTERSTITIAL_PLACEMENT = new SASAdPlacement(104808,
             "1160279",
             85867,
-            "interstitial-inapp-bidding",
-            true);
+            "interstitial-inapp-bidding");
 
     /*****************************************
      * Members declarations

@@ -11,14 +11,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private val siteId = 1337 // Your site id
-    private val baseUrlString = "https://mobile.smartadserver.com" // Your base URL
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         // First of all, configure the SDK
-        SASConfiguration.getSharedInstance().configure(this, siteId, baseUrlString)
+        SASConfiguration.getSharedInstance().configure(this, siteId)
 
         // Enable output to Android Logcat (optional)
         SASConfiguration.getSharedInstance().isLoggingEnabled = true
@@ -68,26 +67,37 @@ class MainActivity : AppCompatActivity() {
         }
 
         /**
-         * GDPR Consent String manual setting.
+         * TCF Consent String v2 manual setting.
          *
-         * By uncommenting the following code, you will set the GDPR consent string manually.
-         * Note: the Smart Display SDK will retrieve the consent string from the SharedPreferences using the official IAB key "IABConsent_ConsentString".
+         * By uncommenting the following code, you will set the TCF consent string v2 manually.
+         * Note: the Smart Display SDK will retrieve the TCF consent string from the SharedPreferences using the official IAB key "IABTCF_TCString".
          *
          * If you are using a CMP that does not store the consent string in the SharedPreferences using the official
          * IAB key, please store it yourself with the official key.
          */
-        // PreferenceManager.getDefaultSharedPreferences(this).edit { putString("IABConsent_ConsentString", "YourConsentString") }
+        // PreferenceManager.getDefaultSharedPreferences(this).edit { putString("IABTCF_TCString", "YourConsentString") }
 
 
         /**
-         * GDPR Binary Consent Status manual setting.
+         * TCF Binary Consent Status manual setting.
          *
-         * Some third party mediation SDKs are not IAB compliant concerning the consent string. Those SDK use
+         * Some third party mediation SDKs are not IAB compliant concerning the TCF consent string. Those SDK use
          * most of the time a binary consent for the advertising purpose.
          * If you are using one or more of those SDK through Smart mediation, you can set this binary consent for
          * all adapters at once by setting the string '1' (if the consent is granted) or '0' (if the consent is denied)
          * in the SharedPreferences for the key 'Smart_advertisingConsentStatus'.
          */
         // PreferenceManager.getDefaultSharedPreferences(this).edit { putString("Smart_advertisingConsentStatus", "1" or "0") }
+
+        /**
+         * CCPA Consent String manual setting.
+         *
+         * By uncommenting the following code, you will set the CCPA consent string manually.
+         * Note: The Smart Display SDK will retrieve the CCPA consent string from the SharedPreferences using the official IAB key "IABUSPrivacy_String".
+         *
+         * If you are using a CMP that does not store the consent string in the SharedPreferences using the official
+         * IAB key, please store it yourself with the official key.
+         */
+        // PreferenceManager.getDefaultSharedPreferences(this).edit { putString("IABUSPrivacy_String", "YourCCPAConsentString") }
     }
 }

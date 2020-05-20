@@ -15,7 +15,11 @@ import kotlinx.android.synthetic.main.activity_banner.*
  */
 class BannerActivity : AppCompatActivity() {
 
-    private val bannerPlacement = SASAdPlacement(104808, "663262", 15140, "")
+    // If you are an inventory reseller, you must provide your Supply Chain Object information.
+    // More info here: https://help.smartadserver.com/s/article/Sellers-json-and-SupplyChain-Object
+    private val supplyChainObjectString: String? = null // "1.0,1!exchange1.com,1234,1,publisher,publisher.com";
+
+    private val bannerPlacement = SASAdPlacement(104808, "663262", 15140, "", supplyChainObjectString)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

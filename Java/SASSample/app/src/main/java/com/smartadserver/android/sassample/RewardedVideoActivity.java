@@ -1,7 +1,7 @@
 package com.smartadserver.android.sassample;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +25,10 @@ public class RewardedVideoActivity extends AppCompatActivity {
     private final static String PAGE_ID = "795153";
     private final static int FORMAT_ID = 12167;
     private final static String TARGET = "rewardedvideo";
+
+    // If you are an inventory reseller, you must provide your Supply Chain Object information.
+    // More info here: https://help.smartadserver.com/s/article/Sellers-json-and-SupplyChain-Object
+    private final static String SUPPLY_CHAIN_OBJECT_STRING = null; // "1.0,1!exchange1.com,1234,1,publisher,publisher.com";
 
     /*****************************************
      * Members declarations
@@ -56,10 +60,10 @@ public class RewardedVideoActivity extends AppCompatActivity {
 
         // Initialize SASRewardedVideoPlacement
         mRewardedVideoPlacement = new SASAdPlacement(RewardedVideoActivity.SITE_ID,
-                RewardedVideoActivity.PAGE_ID,
-                RewardedVideoActivity.FORMAT_ID,
-                RewardedVideoActivity.TARGET,
-                true);
+                PAGE_ID,
+                FORMAT_ID,
+                TARGET,
+                SUPPLY_CHAIN_OBJECT_STRING);
 
         // Instantiate a new rewarded video manager
         mRewardedVideoManager = new SASRewardedVideoManager(this, mRewardedVideoPlacement);

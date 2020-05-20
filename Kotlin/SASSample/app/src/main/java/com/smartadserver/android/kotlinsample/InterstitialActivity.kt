@@ -13,9 +13,14 @@ import kotlinx.android.synthetic.main.activity_interstitial.*
  */
 class InterstitialActivity : AppCompatActivity() {
 
+    // If you are an inventory reseller, you must provide your Supply Chain Object information.
+    // More info here: https://help.smartadserver.com/s/article/Sellers-json-and-SupplyChain-Object
+    private val supplyChainObjectString: String? = null // "1.0,1!exchange1.com,1234,1,publisher,publisher.com";
+
+
     // The SASInterstitialManager instance
     private val interstitialManager by lazy {
-        SASInterstitialManager(this, SASAdPlacement(104808, "663264", 12167, ""))
+        SASInterstitialManager(this, SASAdPlacement(104808, "663264", 12167, "", supplyChainObjectString))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

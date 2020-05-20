@@ -1,7 +1,7 @@
 package com.smartadserver.android.sassample;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
@@ -22,12 +22,14 @@ public class BannerActivity extends AppCompatActivity {
     /*****************************************
      * Ad Constants
      *****************************************/
-    private final static SASAdPlacement BANNER_PLACEMENT = new SASAdPlacement(104808,
-            "663262",
-            15140,
-            "",
-            true);
+    private final static int SITE_ID = 104808;
+    private final static String PAGE_ID = "663262";
+    private final static int FORMAT_ID = 15140;
+    private final static String TARGET = "";
 
+    // If you are an inventory reseller, you must provide your Supply Chain Object information.
+    // More info here: https://help.smartadserver.com/s/article/Sellers-json-and-SupplyChain-Object
+    private final static String SUPPLY_CHAIN_OBJECT_STRING = null; // "1.0,1!exchange1.com,1234,1,publisher,publisher.com";
 
     /*****************************************
      * Members declarations
@@ -150,8 +152,14 @@ public class BannerActivity extends AppCompatActivity {
      * Loads an ad on the banner
      */
     private void loadBannerAd() {
+        SASAdPlacement adPlacement = new SASAdPlacement(SITE_ID,
+                PAGE_ID,
+                FORMAT_ID,
+                TARGET,
+                SUPPLY_CHAIN_OBJECT_STRING);
+
         // Load banner ad with appropriate parameters (siteID,pageID,formatID,master,targeting,adResponseHandler)
-        mBannerView.loadAd(BANNER_PLACEMENT);
+        mBannerView.loadAd(adPlacement);
     }
 
 }

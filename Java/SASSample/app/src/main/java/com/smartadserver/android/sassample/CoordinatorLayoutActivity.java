@@ -3,11 +3,11 @@ package com.smartadserver.android.sassample;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import com.google.android.material.appbar.AppBarLayout;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +24,14 @@ public class CoordinatorLayoutActivity extends AppCompatActivity {
     /*****************************************
      * Ad Constants
      *****************************************/
-    private final static SASAdPlacement AD_PLACEMENT = new SASAdPlacement(104808, "663531", 15140, "", true);
+    private final static int SITE_ID = 104808;
+    private final static String PAGE_ID = "663531";
+    private final static int FORMAT_ID = 15140;
+    private final static String TARGET = "";
+
+    // If you are an inventory reseller, you must provide your Supply Chain Object information.
+    // More info here: https://help.smartadserver.com/s/article/Sellers-json-and-SupplyChain-Object
+    private final static String SUPPLY_CHAIN_OBJECT_STRING = null; // "1.0,1!exchange1.com,1234,1,publisher,publisher.com";
 
     private static final int AD_POSITION = 10;
 
@@ -139,7 +146,14 @@ public class CoordinatorLayoutActivity extends AppCompatActivity {
      */
     private void createAndLoadAd() {
         bannerWrapper = new AdViewWrapper(this);
-        bannerWrapper.loadAd(AD_PLACEMENT);
+
+        SASAdPlacement adPlacement = new SASAdPlacement(SITE_ID,
+                PAGE_ID,
+                FORMAT_ID,
+                TARGET,
+                SUPPLY_CHAIN_OBJECT_STRING);
+
+        bannerWrapper.loadAd(adPlacement);
     }
 
     /**

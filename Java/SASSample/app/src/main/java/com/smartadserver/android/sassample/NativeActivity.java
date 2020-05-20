@@ -8,9 +8,9 @@ import java.util.HashSet;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +36,10 @@ public class NativeActivity extends AppCompatActivity {
     private final static String PAGE_ID_WITH_MEDIA = "692588";
     private final static int FORMAT_ID = 15140;
     private final static String TARGET = "";
+
+    // If you are an inventory reseller, you must provide your Supply Chain Object information.
+    // More info here: https://help.smartadserver.com/s/article/Sellers-json-and-SupplyChain-Object
+    private final static String SUPPLY_CHAIN_OBJECT_STRING = null; // "1.0,1!exchange1.com,1234,1,publisher,publisher.com";
 
     /*****************************************
      * Members declarations
@@ -99,7 +103,7 @@ public class NativeActivity extends AppCompatActivity {
         }
 
         // Create a native ad placement.
-        mAdPlacement = new SASAdPlacement(SITE_ID, pageID, FORMAT_ID, TARGET);
+        mAdPlacement = new SASAdPlacement(SITE_ID, pageID, FORMAT_ID, TARGET, SUPPLY_CHAIN_OBJECT_STRING);
 
         // Create a native ad manager, initialized with the placement.
         mNativeAdManager = new SASNativeAdManager(this, mAdPlacement);

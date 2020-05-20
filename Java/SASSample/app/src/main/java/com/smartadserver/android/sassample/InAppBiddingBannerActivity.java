@@ -1,8 +1,8 @@
 package com.smartadserver.android.sassample;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
@@ -31,8 +31,7 @@ public class InAppBiddingBannerActivity extends AppCompatActivity implements SAS
     private final static SASAdPlacement BANNER_PLACEMENT = new SASAdPlacement(104808,
             "1160279",
             85867,
-            "banner-inapp-bidding",
-            true);
+            "banner-inapp-bidding");
 
 
     /*****************************************

@@ -15,8 +15,12 @@ import kotlinx.android.synthetic.main.activity_interstitial.*
  */
 class RewardedVideoActivity : AppCompatActivity() {
 
+    // If you are an inventory reseller, you must provide your Supply Chain Object information.
+    // More info here: https://help.smartadserver.com/s/article/Sellers-json-and-SupplyChain-Object
+    private val supplyChainObjectString: String? = null // "1.0,1!exchange1.com,1234,1,publisher,publisher.com";
+
     private val rewardedVideoManager by lazy {
-        SASRewardedVideoManager(this, SASAdPlacement(104808, "795153", 12167, "rewardedvideo"))
+        SASRewardedVideoManager(this, SASAdPlacement(104808, "795153", 12167, "rewardedvideo", supplyChainObjectString))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

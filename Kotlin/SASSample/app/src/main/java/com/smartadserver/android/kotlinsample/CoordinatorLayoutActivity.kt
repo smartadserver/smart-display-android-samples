@@ -19,8 +19,12 @@ private const val adPosition = 10
 
 class CoordinatorLayoutActivity : AppCompatActivity() {
 
+    // If you are an inventory reseller, you must provide your Supply Chain Object information.
+    // More info here: https://help.smartadserver.com/s/article/Sellers-json-and-SupplyChain-Object
+    private val supplyChainObjectString: String? = null // "1.0,1!exchange1.com,1234,1,publisher,publisher.com";
+
     // Ad Placement constant
-    private val adPlacement = SASAdPlacement(104808, "663531", 15140, "")
+    private val adPlacement = SASAdPlacement(104808, "663531", 15140, "", supplyChainObjectString)
 
     private val bannerViewHolderWrapper by lazy { BannerViewHolderWrapper(this) }
 
@@ -110,7 +114,7 @@ class CoordinatorLayoutActivity : AppCompatActivity() {
         bannerViewHolderWrapper.loadAd(adPlacement)
     }
 
-    override fun onConfigurationChanged(newConfig: Configuration?) {
+    override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
 
         // add a OnGlobalLayoutListener to execute adaptBannerHeight method once the activity has its new size set

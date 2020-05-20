@@ -1,7 +1,7 @@
 package com.smartadserver.android.sassample.util;
 
 import android.graphics.Color;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.widget.TextView;
 import android.view.View;
 import com.smartadserver.android.sassample.R;

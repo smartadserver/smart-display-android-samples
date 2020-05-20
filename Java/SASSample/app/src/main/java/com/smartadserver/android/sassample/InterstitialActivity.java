@@ -1,7 +1,7 @@
 package com.smartadserver.android.sassample;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
@@ -20,11 +20,14 @@ public class InterstitialActivity extends AppCompatActivity {
     /*****************************************
      * Ad Constants
      *****************************************/
-    private final static SASAdPlacement INTERSTITIAL_PLACEMENT = new SASAdPlacement(104808,
-            "663264",
-            12167,
-            "",
-            true);
+    private final static int SITE_ID = 104808;
+    private final static String PAGE_ID = "663264";
+    private final static int FORMAT_ID = 12167;
+    private final static String TARGET = "";
+
+    // If you are an inventory reseller, you must provide your Supply Chain Object information.
+    // More info here: https://help.smartadserver.com/s/article/Sellers-json-and-SupplyChain-Object
+    private final static String SUPPLY_CHAIN_OBJECT_STRING = null; // "1.0,1!exchange1.com,1234,1,publisher,publisher.com";
 
     /*****************************************
      * Members declarations
@@ -139,8 +142,14 @@ public class InterstitialActivity extends AppCompatActivity {
      */
     private void initInterstitialManager() {
 
+        SASAdPlacement adPlacement = new SASAdPlacement(SITE_ID,
+                PAGE_ID,
+                FORMAT_ID,
+                TARGET,
+                SUPPLY_CHAIN_OBJECT_STRING);
+
         // Create SASInterstitialManager instance
-        mInterstitialManager = new SASInterstitialManager(this, INTERSTITIAL_PLACEMENT);
+        mInterstitialManager = new SASInterstitialManager(this, adPlacement);
 
         interstitialListener = new SASInterstitialManager.InterstitialListener() {
             @Override

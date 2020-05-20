@@ -34,9 +34,13 @@ class NativeAdActivity : AppCompatActivity() {
     private var adLoaded = false
     private val adPosition = 8
 
+    // If you are an inventory reseller, you must provide your Supply Chain Object information.
+    // More info here: https://help.smartadserver.com/s/article/Sellers-json-and-SupplyChain-Object
+    private val supplyChainObjectString: String? = null // "1.0,1!exchange1.com,1234,1,publisher,publisher.com";
+
     // Native Ads placements
-    private val nativeAdPlacement = SASAdPlacement(104808, "720265", 15140, "")
-    private val nativeAdWithMediaPlacement = SASAdPlacement(104808, "692588", 15140, "")
+    private val nativeAdPlacement = SASAdPlacement(104808, "720265", 15140, "", supplyChainObjectString)
+    private val nativeAdWithMediaPlacement = SASAdPlacement(104808, "692588", 15140, "", supplyChainObjectString)
 
     private inner class ListLayoutAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

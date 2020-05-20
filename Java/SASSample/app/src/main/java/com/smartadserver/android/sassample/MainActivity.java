@@ -1,10 +1,9 @@
 package com.smartadserver.android.sassample;
 
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +19,6 @@ import com.smartadserver.android.library.util.SASConfiguration;
 public class MainActivity extends AppCompatActivity {
 
     static private final int SITE_ID = 1337; // Your SITE_ID
-    static private final String BASE_URL = "https://mobile.smartadserver.com"; // Your base url
 
     private ListView mListView = null;
 
@@ -31,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         // First of all, configure the SDK
         try {
-            SASConfiguration.getSharedInstance().configure(this, SITE_ID, BASE_URL);
+            SASConfiguration.getSharedInstance().configure(this, SITE_ID);
         } catch (SASConfiguration.ConfigurationException e) {
             Log.w("Sample", "Smart SDK configuration failed: " + e.getMessage());
         }
@@ -47,9 +45,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                int selectedIndex = position;
 
-                switch (selectedIndex) {
+                switch (position) {
                     case 1:
                         startBannerActivity();
                         break;
@@ -86,23 +83,23 @@ public class MainActivity extends AppCompatActivity {
         });
 
         /**
-         * GDPR Consent String manual setting.
+         * TCF Consent String v2 manual setting.
          *
-         * By uncommenting the following code, you will set the GDPR consent string manually.
-         * Note: the Smart Display SDK will retrieve the consent string from the SharedPreferences using the official IAB key "IABConsent_ConsentString".
+         * By uncommenting the following code, you will set the TCF consent string v2 manually.
+         * Note: the Smart Display SDK will retrieve the TCF consent string from the SharedPreferences using the official IAB key "IABTCF_TCString".
          *
          * If you are using a CMP that does not store the consent string in the SharedPreferences using the official
          * IAB key, please store it yourself with the official key.
          */
         // SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         // SharedPreferences.Editor editor = prefs.edit();
-        // editor.putString("IABConsent_ConsentString", "YourConsentString");
+        // editor.putString("IABTCF_TCString", "YourTCFConsentString");
         // editor.apply();
 
         /**
-         * GDPR Binary Consent Status manual setting.
+         * TCF Binary Consent Status manual setting.
          *
-         * Some third party mediation SDKs are not IAB compliant concerning the consent string. Those SDK use
+         * Some third party mediation SDKs are not IAB compliant concerning the TCF consent string. Those SDK use
          * most of the time a binary consent for the advertising purpose.
          * If you are using one or more of those SDK through Smart mediation, you can set this binary consent for
          * all adapters at once by setting the string '1' (if the consent is granted) or '0' (if the consent is denied)
@@ -111,6 +108,20 @@ public class MainActivity extends AppCompatActivity {
         // SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         // SharedPreferences.Editor editor = prefs.edit();
         // editor.putString("Smart_advertisingConsentStatus", "1" or "0");
+        // editor.apply();
+
+        /**
+         * CCPA Consent String manual setting.
+         *
+         * By uncommenting the following code, you will set the CCPA consent string manually.
+         * Note: The Smart Display SDK will retrieve the CCPA consent string from the SharedPreferences using the official IAB key "IABUSPrivacy_String".
+         *
+         * If you are using a CMP that does not store the consent string in the SharedPreferences using the official
+         * IAB key, please store it yourself with the official key.
+         */
+        // SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        // SharedPreferences.Editor editor = prefs.edit();
+        // editor.putString("IABUSPrivacy_String", "YourCCPAConsentString");
         // editor.apply();
     }
 
