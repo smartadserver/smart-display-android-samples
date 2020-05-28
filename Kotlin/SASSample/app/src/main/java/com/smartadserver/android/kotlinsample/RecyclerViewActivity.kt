@@ -176,7 +176,7 @@ class RecyclerViewActivity : AppCompatActivity() {
         bannerViewHolderWrapper.loadAd(adPlacement)
 
         // To avoid having the parallax going below the actionBar, we have to set the parallax margin top, which is its top limit.
-        // To do so, we set the action bar height as the parallaxMarginTop of the banner.
+        // To do so, we set the action bar height as the parallaxMarginTop of the banner. Note that you can do the same with the bottom margin by using the setParallaxMarginBottom() method.
         bannerViewHolderWrapper.bannerView.setParallaxMarginTop(actionBarHeight.toInt())
 
         return bannerViewHolderWrapper

@@ -140,8 +140,9 @@ public class RecyclerActivity extends AppCompatActivity {
                 new int[]{android.R.attr.actionBarSize}
         );
         actionBarHeight = (int) styledAttributes.getDimension(0, 0);
-        // Then we set its height as parallaxMarginTop.
+        // Then we set its height as parallaxMarginTop. Note that you can do the same with the bottom margin by using the setParallaxMarginBottom() method.
         bannerWrapper.mBanner.setParallaxMarginTop(actionBarHeight);
+
         return bannerWrapper;
     }
 
