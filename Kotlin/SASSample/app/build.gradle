@@ -43,7 +43,7 @@ dependencies {
     implementation 'com.huawei.hms:ads-identifier:3.4.28.305'
     implementation 'com.huawei.hms:location:4.0.2.300'
     // Smart Display SDK
-    implementation 'com.smartadserver.android:smart-core-sdk:7.6.0@aar'
+    implementation 'com.smartadserver.android:smart-core-sdk:7.6.1@aar'
     implementation 'com.smartadserver.android:smart-display-sdk:7.6.1@aar'
 
     // OkHttp required by Smart SDKs
