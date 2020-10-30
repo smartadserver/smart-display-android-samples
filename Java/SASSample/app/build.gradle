@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 30
 
     defaultConfig {
         applicationId "com.smartadserver.android.sassample"
         minSdkVersion 19
-        targetSdkVersion 28
+        targetSdkVersion 30
         multiDexEnabled true
     }
     buildTypes {
@@ -37,8 +37,8 @@ dependencies {
     implementation 'com.huawei.hms:location:4.0.2.300'
 
     // Smart display SDK
-    implementation 'com.smartadserver.android:smart-core-sdk:7.6.1@aar'
-    implementation 'com.smartadserver.android:smart-display-sdk:7.6.1@aar'
+    implementation 'com.smartadserver.android:smart-core-sdk:7.6.2@aar'
+    implementation 'com.smartadserver.android:smart-display-sdk:7.6.2@aar'
 
     // OkHttp required by smart SDK
     implementation 'com.squareup.okhttp3:okhttp:3.12.1'
