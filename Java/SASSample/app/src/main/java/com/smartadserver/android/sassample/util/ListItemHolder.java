@@ -1,6 +1,8 @@
 package com.smartadserver.android.sassample.util;
 
 import android.graphics.Color;
+
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import android.widget.TextView;
 import android.view.View;
@@ -16,7 +18,7 @@ public class ListItemHolder extends RecyclerView.ViewHolder {
     private TextView textViewTitle;
     private TextView textViewSubtitle;
 
-    public ListItemHolder(View itemView) {
+    public ListItemHolder(@NonNull View itemView) {
         super(itemView);
         textViewIndex = (TextView) itemView.findViewById(R.id.indexLabel);
         textViewTitle = (TextView) itemView.findViewById(R.id.title);

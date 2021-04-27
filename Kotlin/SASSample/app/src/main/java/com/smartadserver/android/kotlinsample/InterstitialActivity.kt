@@ -20,7 +20,7 @@ class InterstitialActivity : AppCompatActivity() {
 
     // The SASInterstitialManager instance
     private val interstitialManager by lazy {
-        SASInterstitialManager(this, SASAdPlacement(104808, "663264", 12167, "", supplyChainObjectString))
+        SASInterstitialManager(this, SASAdPlacement(104808, 663264, 12167, "", supplyChainObjectString))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,44 +31,44 @@ class InterstitialActivity : AppCompatActivity() {
         interstitialManager.interstitialListener =
             object : SASInterstitialManager.InterstitialListener {
                 override fun onInterstitialAdLoaded(
-                    interstitialManager: SASInterstitialManager?,
-                    adElement: SASAdElement?
+                    interstitialManager: SASInterstitialManager,
+                    adElement: SASAdElement
                 ) {
                     Log.i("Sample", "Interstitial loading completed.")
                     showAdButton.post { showAdButton.isEnabled = true }
                 }
 
                 override fun onInterstitialAdFailedToLoad(
-                    interstitialManager: SASInterstitialManager?,
-                    e: Exception?
+                    interstitialManager: SASInterstitialManager,
+                    e: Exception
                 ) {
                     Log.i("Sample", "Interstitial failed to load.")
                     showAdButton.post { showAdButton.isEnabled = false }
                 }
 
-                override fun onInterstitialAdShown(interstitialManager: SASInterstitialManager?) {
+                override fun onInterstitialAdShown(interstitialManager: SASInterstitialManager) {
                     Log.i("Sample", "Interstitial was shown.")
                     showAdButton.post { showAdButton.isEnabled = false }
                 }
 
                 override fun onInterstitialAdFailedToShow(
-                    interstitialManager: SASInterstitialManager?,
-                    e: Exception?
+                    interstitialManager: SASInterstitialManager,
+                    e: Exception
                 ) {
                     Log.i("Sample", "Interstitial failed to show: $e")
                     showAdButton.post { showAdButton.isEnabled = false }
                 }
 
-                override fun onInterstitialAdDismissed(interstitialManager: SASInterstitialManager?) {
+                override fun onInterstitialAdDismissed(interstitialManager: SASInterstitialManager) {
                     Log.i("Sample", "Interstitial was dismissed.")
                 }
 
-                override fun onInterstitialAdClicked(interstitialManager: SASInterstitialManager?) {
+                override fun onInterstitialAdClicked(interstitialManager: SASInterstitialManager) {
                     Log.i("Sample", "Interstitial was clicked.")
                 }
 
                 override fun onInterstitialAdVideoEvent(
-                    interstitialManager: SASInterstitialManager?,
+                    interstitialManager: SASInterstitialManager,
                     event: Int
                 ) {
                     Log.i("Sample", "Video event $event was triggered on Interstitial.")

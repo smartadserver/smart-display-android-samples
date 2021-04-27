@@ -39,8 +39,8 @@ class NativeAdActivity : AppCompatActivity() {
     private val supplyChainObjectString: String? = null // "1.0,1!exchange1.com,1234,1,publisher,publisher.com";
 
     // Native Ads placements
-    private val nativeAdPlacement = SASAdPlacement(104808, "720265", 15140, "", supplyChainObjectString)
-    private val nativeAdWithMediaPlacement = SASAdPlacement(104808, "692588", 15140, "", supplyChainObjectString)
+    private val nativeAdPlacement = SASAdPlacement(104808, 720265, 15140, "", supplyChainObjectString)
+    private val nativeAdWithMediaPlacement = SASAdPlacement(104808, 692588, 15140, "", supplyChainObjectString)
 
     private inner class ListLayoutAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -194,25 +194,29 @@ class NativeAdActivity : AppCompatActivity() {
 
         // Set native ad manager listener
         nativeAdManager.nativeAdListener = object : SASNativeAdManager.NativeAdListener {
-            override fun onNativeAdLoaded(nativeAdElement: SASNativeAdElement?) {
+            override fun onNativeAdLoaded(nativeAdElement: SASNativeAdElement) {
                 currentNativeAd = nativeAdElement
 
-                currentNativeAd?.let {
+                currentNativeAd?.let { nativeAd ->
                     adLoaded = true
 
                     // Download icon for native ad
-                    if (it.icon != null && it.icon.url != null && it.icon.url.isNotEmpty()) {
-                        nativeAdIconBitmap =
-                            scaledBitmapFromUrl(it.icon.url, it.icon.width, it.icon.height)
+                    nativeAd.icon?.let { icon ->
+                        if (icon.url.isNotEmpty()) {
+                            nativeAdIconBitmap =
+                                scaledBitmapFromUrl(icon.url, icon.width, icon.height)
+                        }
                     }
 
                     // download cover for native ad
-                    if (it.coverImage != null && it.coverImage.url != null && it.coverImage.url.isNotEmpty()) {
-                        nativeAdCoverBitmap = scaledBitmapFromUrl(
-                            it.coverImage.url,
-                            it.coverImage.width,
-                            it.icon.height
-                        )
+                    nativeAd.coverImage?.let { cover ->
+                        if (cover.url.isNotEmpty()) {
+                            nativeAdCoverBitmap = scaledBitmapFromUrl(
+                                cover.url,
+                                cover.width,
+                                cover.height
+                            )
+                        }
                     }
 
                     recyclerView.post {
@@ -221,7 +225,7 @@ class NativeAdActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onNativeAdFailedToLoad(e: Exception?) {
+            override fun onNativeAdFailedToLoad(e: Exception) {
                 Log.i("NativeActivity", "Native Ad Loading Failed.")
             }
 

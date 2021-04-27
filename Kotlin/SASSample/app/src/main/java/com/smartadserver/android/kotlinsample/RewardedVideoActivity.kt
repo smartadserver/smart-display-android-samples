@@ -20,7 +20,7 @@ class RewardedVideoActivity : AppCompatActivity() {
     private val supplyChainObjectString: String? = null // "1.0,1!exchange1.com,1234,1,publisher,publisher.com";
 
     private val rewardedVideoManager by lazy {
-        SASRewardedVideoManager(this, SASAdPlacement(104808, "795153", 12167, "rewardedvideo", supplyChainObjectString))
+        SASRewardedVideoManager(this, SASAdPlacement(104808, 795153, 12167, "rewardedvideo", supplyChainObjectString))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,64 +31,62 @@ class RewardedVideoActivity : AppCompatActivity() {
         rewardedVideoManager.rewardedVideoListener =
             object : SASRewardedVideoManager.RewardedVideoListener {
                 override fun onRewardedVideoAdLoaded(
-                    rewardedVideoManager: SASRewardedVideoManager?,
-                    adElement: SASAdElement?
+                    rewardedVideoManager: SASRewardedVideoManager,
+                    adElement: SASAdElement
                 ) {
                     Log.i("Sample", "Rewarded video ad loading completed.")
                     showAdButton.post { showAdButton.isEnabled = true }
                 }
 
                 override fun onRewardedVideoAdFailedToLoad(
-                    rewardedVideoManager: SASRewardedVideoManager?,
-                    e: Exception?
+                    rewardedVideoManager: SASRewardedVideoManager,
+                    e: Exception
                 ) {
                     Log.i("Sample", "Rewarded video failed to load: $e.")
                     showAdButton.post { showAdButton.isEnabled = false }
                 }
 
-                override fun onRewardedVideoAdShown(rewardedVideoManager: SASRewardedVideoManager?) {
+                override fun onRewardedVideoAdShown(rewardedVideoManager: SASRewardedVideoManager) {
                     Log.i("Sample", "Rewarded video was shown.")
                     showAdButton.post { showAdButton.isEnabled = false }
                 }
 
                 override fun onRewardedVideoAdFailedToShow(
-                    rewardedVideoManager: SASRewardedVideoManager?,
-                    e: Exception?
+                    rewardedVideoManager: SASRewardedVideoManager,
+                    e: Exception
                 ) {
                     Log.i("Sample", "Rewarded video failed to show: $e.")
                     showAdButton.post { showAdButton.isEnabled = false }
                 }
 
-                override fun onRewardedVideoAdClicked(rewardedVideoManager: SASRewardedVideoManager?) {
+                override fun onRewardedVideoAdClicked(rewardedVideoManager: SASRewardedVideoManager) {
                     Log.i("Sample", "Rewarded video was clicked.")
                 }
 
-                override fun onRewardedVideoAdClosed(rewardedVideoManager: SASRewardedVideoManager?) {
+                override fun onRewardedVideoAdClosed(rewardedVideoManager: SASRewardedVideoManager) {
                     Log.i("Sample", "Rewarded video was closed.")
                 }
 
                 override fun onRewardReceived(
-                    rewardedVideoManager: SASRewardedVideoManager?,
-                    reward: SASReward?
+                    rewardedVideoManager: SASRewardedVideoManager,
+                    reward: SASReward
                 ) {
-                    if (reward != null) {
-                        Log.i(
-                            "Sample",
-                            "Rewarded collected a reward. User should be rewarded with: ${reward.amount} ${reward.currency}."
-                        )
-                    }
+                    Log.i(
+                        "Sample",
+                        "Rewarded collected a reward. User should be rewarded with: ${reward.amount} ${reward.currency}."
+                    )
                 }
 
                 override fun onRewardedVideoEvent(
-                    rewardedVideoManager: SASRewardedVideoManager?,
+                    rewardedVideoManager: SASRewardedVideoManager,
                     event: Int
                 ) {
                     Log.i("Sample", "Video event $event was triggered on RewardedVideo.")
                 }
 
                 override fun onRewardedVideoEndCardDisplayed(
-                    rewardedVideoManager: SASRewardedVideoManager?,
-                    viewGroup: ViewGroup?
+                    rewardedVideoManager: SASRewardedVideoManager,
+                    viewGroup: ViewGroup
                 ) {
                     Log.i("Sample", "Rewarde video HTML EndCard was displayed.")
                 }

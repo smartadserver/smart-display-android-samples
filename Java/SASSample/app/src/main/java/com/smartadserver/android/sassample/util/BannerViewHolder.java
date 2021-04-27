@@ -1,5 +1,6 @@
 package com.smartadserver.android.sassample.util;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
@@ -8,7 +9,7 @@ import android.view.View;
  */
 
 public class BannerViewHolder extends RecyclerView.ViewHolder {
-    public BannerViewHolder(View itemView) {
+    public BannerViewHolder(@NonNull View itemView) {
         super(itemView);
     }
 }

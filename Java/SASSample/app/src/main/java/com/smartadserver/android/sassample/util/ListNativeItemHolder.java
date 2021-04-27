@@ -1,6 +1,8 @@
 package com.smartadserver.android.sassample.util;
 
 import android.graphics.Color;
+
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
@@ -27,7 +29,7 @@ public class ListNativeItemHolder extends RecyclerView.ViewHolder {
     // Optional, only for items that are ads
     public ImageView posterImageView;
 
-    public ListNativeItemHolder(View itemView) {
+    public ListNativeItemHolder(@NonNull View itemView) {
         super(itemView);
         textViewIndex = (TextView) itemView.findViewById(R.id.indexLabel);
         textViewTitle = (TextView) itemView.findViewById(R.id.titleLabel);

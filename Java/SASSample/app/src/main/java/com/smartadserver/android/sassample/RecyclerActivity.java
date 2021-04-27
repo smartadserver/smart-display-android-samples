@@ -3,6 +3,9 @@ package com.smartadserver.android.sassample;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,9 +31,9 @@ public class RecyclerActivity extends AppCompatActivity {
     // More info here: https://help.smartadserver.com/s/article/Sellers-json-and-SupplyChain-Object
     private final static String SUPPLY_CHAIN_OBJECT_STRING = null; // "1.0,1!exchange1.com,1234,1,publisher,publisher.com";
 
-    private final static SASAdPlacement BANNER_PLACEMENT = new SASAdPlacement(104808, "663262", 15140, "", SUPPLY_CHAIN_OBJECT_STRING);
-    private final static SASAdPlacement VIDEOREAD_PLACEMENT = new SASAdPlacement(104808, "663530", 15140, "", SUPPLY_CHAIN_OBJECT_STRING);
-    private final static SASAdPlacement PARALLAX_PLACEMENT = new SASAdPlacement(104808, "663531", 15140, "", SUPPLY_CHAIN_OBJECT_STRING);
+    private final static SASAdPlacement BANNER_PLACEMENT = new SASAdPlacement(104808, 663262, 15140, "", SUPPLY_CHAIN_OBJECT_STRING);
+    private final static SASAdPlacement VIDEOREAD_PLACEMENT = new SASAdPlacement(104808, 663530, 15140, "", SUPPLY_CHAIN_OBJECT_STRING);
+    private final static SASAdPlacement PARALLAX_PLACEMENT = new SASAdPlacement(104808, 663531, 15140, "", SUPPLY_CHAIN_OBJECT_STRING);
 
     private final static int AD_SPACING = 6;
 
@@ -46,7 +49,7 @@ public class RecyclerActivity extends AppCompatActivity {
      * performs Activity initialization after creation
      */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler);
 
@@ -80,7 +83,7 @@ public class RecyclerActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
         // add a OnGlobalLayoutListener to execute adaptBannerHeight once the activity has its new size set (otherwise it
@@ -211,7 +214,8 @@ public class RecyclerActivity extends AppCompatActivity {
          * On create : return the proper ViewHolder according to viewType.
          */
         @Override
-        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        @NonNull
+        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             if (VIEW_TYPE_TEXT == viewType) {
                 View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
                 return new ListItemHolder(v);
@@ -227,7 +231,7 @@ public class RecyclerActivity extends AppCompatActivity {
          * Type Ad : Get the AdViewWrapper corresponding to position and set its holder.
          */
         @Override
-        public void onBindViewHolder(RecyclerView.ViewHolder listViewHolder, final int position) {
+        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder listViewHolder, final int position) {
             if (VIEW_TYPE_TEXT == getItemViewType(position)) {
                 ListItemHolder holder = (ListItemHolder) listViewHolder;
                 String title = (position == 0) ? "Multiple banners in RecyclerView integration" : "Lorem ipsum dolor sit amet";
@@ -248,7 +252,7 @@ public class RecyclerActivity extends AppCompatActivity {
          * The wrapper will become available again to be displayed in another holder.
          */
         @Override
-        public void onViewRecycled(RecyclerView.ViewHolder holder) {
+        public void onViewRecycled(@NonNull RecyclerView.ViewHolder holder) {
             super.onViewRecycled(holder);
             if (holder instanceof BannerViewHolder) {
                 AdViewWrapper wrapper = wrapperForHolder((BannerViewHolder) holder);

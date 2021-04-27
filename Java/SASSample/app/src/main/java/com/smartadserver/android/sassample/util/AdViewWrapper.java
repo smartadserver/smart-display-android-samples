@@ -1,9 +1,16 @@
 package com.smartadserver.android.sassample.util;
 
 import android.content.Context;
+import android.os.Build;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.smartadserver.android.library.model.SASAdElement;
 import com.smartadserver.android.library.model.SASAdPlacement;
@@ -36,18 +43,19 @@ public class AdViewWrapper {
     private boolean mIsAdLoaded;
 
 
-    public AdViewWrapper (Context context) {
+    public AdViewWrapper (@NonNull Context context) {
         mBanner = new SASBannerView(context); //Instantiate banner from layout.
         mBanner.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,0));
 
         SASBannerView.BannerListener bannerListener = new SASBannerView.BannerListener() {
             @Override
-            public void onBannerAdLoaded(SASBannerView bannerView, SASAdElement adElement) {
+            public void onBannerAdLoaded(@NonNull SASBannerView bannerView, @NonNull SASAdElement adElement) {
                 Log.i("Sample", "Banner loading completed");
                 Runnable resizeRunnable = new Runnable() {
                     @Override
                     public void run() {
-                        resizeBannerCell(mBanner.getOptimalHeight());
+                        int defaultHeight = (int) (50 * bannerView.getResources().getDisplayMetrics().density);
+                        updateBannerSize(defaultHeight);
                     }
                 };
 
@@ -58,7 +66,7 @@ public class AdViewWrapper {
             }
 
             @Override
-            public void onBannerAdFailedToLoad(SASBannerView bannerView, Exception e) {
+            public void onBannerAdFailedToLoad(@NonNull SASBannerView bannerView, @NonNull Exception e) {
                 Log.i("Sample", "Banner loading failed: " + e.getMessage());
                 mBanner.executeOnUIThread(new Runnable() {
                     @Override
@@ -69,32 +77,32 @@ public class AdViewWrapper {
             }
 
             @Override
-            public void onBannerAdClicked(SASBannerView bannerView) {
+            public void onBannerAdClicked(@NonNull SASBannerView bannerView) {
                 Log.i("Sample", "Banner was clicked");
             }
 
             @Override
-            public void onBannerAdExpanded(SASBannerView bannerView) {
+            public void onBannerAdExpanded(@NonNull SASBannerView bannerView) {
                 Log.i("Sample", "Banner was expanded");
             }
 
             @Override
-            public void onBannerAdCollapsed(SASBannerView bannerView) {
+            public void onBannerAdCollapsed(@NonNull SASBannerView bannerView) {
                 Log.i("Sample", "Banner was collapsed");
             }
 
             @Override
-            public void onBannerAdResized(SASBannerView bannerView) {
+            public void onBannerAdResized(@NonNull SASBannerView bannerView) {
                 Log.i("Sample", "Banner was resized");
             }
 
             @Override
-            public void onBannerAdClosed(SASBannerView bannerView) {
+            public void onBannerAdClosed(@NonNull SASBannerView bannerView) {
                 Log.i("Sample", "Banner was closed");
             }
 
             @Override
-            public void onBannerAdVideoEvent(SASBannerView bannerView, int videoEvent) {
+            public void onBannerAdVideoEvent(@NonNull SASBannerView bannerView, int videoEvent) {
                 switch (videoEvent) {
                     case SASAdView.VideoEvents.VIDEO_START:
                         Log.i(TAG, "Video event : VIDEO_START");
@@ -206,12 +214,25 @@ public class AdViewWrapper {
             mBanner.executeOnUIThread(new Runnable() {
                 @Override
                 public void run() {
-                    //Use getOptimalHeight() convenient method to display your ad with the proper aspect ratio !
-                    int height = mBanner.getOptimalHeight();
-                    if (height <= 0) {
-                        height = defaultHeight;
+                    // Use getRatio() convenient method to compute the banner height to best fit the creative aspect ratio
+                    int height = defaultHeight;
+                    double ratio = mBanner.getRatio();
+                    if (ratio > 0) {
+
+                        // retrieve screen width, as the banner stretches across the whole width
+                        Display display = mBanner.getContext().getDisplay();
+
+                        if (display != null) {
+                            DisplayMetrics displayMetrics = new DisplayMetrics();
+                            display.getRealMetrics(displayMetrics);
+
+                            int width = displayMetrics.widthPixels;
+
+                            height = (int)(width / ratio);
+                        }
                     }
-                    // Resize the table view cell if an height value is available
+
+                    // Resize the table view cell with the height value
                     height = (int) Math.max(DEFAULT_BANNER_HEIGHT, Math.min(MAX_BANNER_HEIGHT, height));
                     resizeBannerCell(height);
                 }
@@ -225,7 +246,7 @@ public class AdViewWrapper {
      * Loading an ad.
      * @param adPlacement the ad placement
      */
-    public void loadAd(SASAdPlacement adPlacement) {
+    public void loadAd(@NonNull SASAdPlacement adPlacement) {
         //Checking for ad loaded is not mandatory here, it just prevents us from reloading the ad.
         if (!mIsAdLoaded) {
             mBanner.loadAd(adPlacement);

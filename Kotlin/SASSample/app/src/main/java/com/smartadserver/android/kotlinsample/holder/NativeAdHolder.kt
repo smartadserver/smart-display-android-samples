@@ -35,7 +35,7 @@ class NativeAdHolder(inflater: LayoutInflater, parent: ViewGroup) :
         adOptionsLayout.visibility = View.GONE
     }
 
-    fun configureForAd(title: String, subtitle: String, callToAction: String, image: Bitmap?) {
+    fun configureForAd(title: String?, subtitle: String?, callToAction: String?, image: Bitmap?) {
         titleTextView.text = title
         subtitleTextView.text = subtitle
         setIndex(0)

@@ -1,7 +1,9 @@
 package com.smartadserver.android.kotlinsample.holder
 
 import android.content.Context
+import android.util.DisplayMetrics
 import android.util.Log
+import android.view.Display
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -55,38 +57,41 @@ class BannerViewHolderWrapper(context: Context) {
         // Banner initialization
         bannerView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0)
         bannerView.bannerListener = object : SASBannerView.BannerListener {
-            override fun onBannerAdLoaded(banner: SASBannerView?, adElement: SASAdElement?) {
+            override fun onBannerAdLoaded(banner: SASBannerView, adElement: SASAdElement) {
                 Log.i("Sample", "Banner loading completed")
-                bannerView.executeOnUIThread { resizeBannerCell(bannerView.optimalHeight) }
+                bannerView.executeOnUIThread {
+                    val defaultHeight = (50 * bannerView.resources.displayMetrics.density).toInt()
+                    updateBannerSize(defaultHeight)
+                }
                 isAdLoaded = true
             }
 
-            override fun onBannerAdFailedToLoad(banner: SASBannerView?, e: Exception?) {
+            override fun onBannerAdFailedToLoad(banner: SASBannerView, e: Exception) {
                 Log.i("Sample", "Banner loading failed: $e")
                 bannerView.executeOnUIThread { resizeBannerCell(0) }
             }
 
-            override fun onBannerAdClicked(banner: SASBannerView?) {
+            override fun onBannerAdClicked(banner: SASBannerView) {
                 Log.i("Sample", "Banner was clicked")
             }
 
-            override fun onBannerAdExpanded(banner: SASBannerView?) {
+            override fun onBannerAdExpanded(banner: SASBannerView) {
                 Log.i("Sample", "Banner was expanded")
             }
 
-            override fun onBannerAdCollapsed(banner: SASBannerView?) {
+            override fun onBannerAdCollapsed(banner: SASBannerView) {
                 Log.i("Sample", "Banner was collapsed")
             }
 
-            override fun onBannerAdClosed(banner: SASBannerView?) {
+            override fun onBannerAdClosed(banner: SASBannerView) {
                 Log.i("Sample", "Banner was closed")
             }
 
-            override fun onBannerAdResized(banner: SASBannerView?) {
+            override fun onBannerAdResized(banner: SASBannerView) {
                 Log.i("Sample", "Banner was resized")
             }
 
-            override fun onBannerAdVideoEvent(banner: SASBannerView?, event: Int) {
+            override fun onBannerAdVideoEvent(banner: SASBannerView, event: Int) {
                 Log.i("Sample", "Banner video event: $event")
             }
         }
@@ -117,9 +122,21 @@ class BannerViewHolderWrapper(context: Context) {
         // Execute only if holder exists, ad is loaded and not expanded
         bannerViewHolder?.let {
             if (isAdLoaded && !bannerView.isExpanded) {
-                // Use optimalHeight convenient method to display your ad with the prope aspect ratio
-                var height =
-                    if (bannerView.optimalHeight <= 0) defaultHeight else bannerView.optimalHeight
+
+                // Use ratio convenient property to compute the banner height to best fit the creative aspect ratio
+                var height = defaultHeight
+                val ratio: Double = bannerView.ratio
+                if (ratio > 0) {
+
+                    // retrieve screen width, as the banner stretches across the whole width
+                    val display: Display? = bannerView.context.display
+                    display?.let {
+                        val displayMetrics = DisplayMetrics()
+                        it.getRealMetrics(displayMetrics)
+                        val width = displayMetrics.widthPixels
+                        height = (width / ratio).toInt()
+                    }
+                }
 
                 // Resize the table view cell if an height value is available
                 height = max(defaultBannerHeight, min(maxBannerHeight, height))

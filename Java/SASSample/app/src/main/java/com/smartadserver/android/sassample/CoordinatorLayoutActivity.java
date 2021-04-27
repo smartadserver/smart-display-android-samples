@@ -3,6 +3,8 @@ package com.smartadserver.android.sassample;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.google.android.material.appbar.AppBarLayout;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,7 +27,7 @@ public class CoordinatorLayoutActivity extends AppCompatActivity {
      * Ad Constants
      *****************************************/
     private final static int SITE_ID = 104808;
-    private final static String PAGE_ID = "663531";
+    private final static int PAGE_ID = 663531;
     private final static int FORMAT_ID = 15140;
     private final static String TARGET = "";
 
@@ -71,7 +73,7 @@ public class CoordinatorLayoutActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
         // add a OnGlobalLayoutListener to execute adaptBannerHeight once the activity has its new size set (otherwise it
@@ -122,7 +124,7 @@ public class CoordinatorLayoutActivity extends AppCompatActivity {
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 updateParallaxOffset();
             }
@@ -180,7 +182,8 @@ public class CoordinatorLayoutActivity extends AppCompatActivity {
         }
 
         @Override
-        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        @NonNull
+        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             if (viewType == VIEW_TYPE_TEXT) {
                 View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
                 return new ListItemHolder(v);
@@ -191,7 +194,7 @@ public class CoordinatorLayoutActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onViewRecycled(RecyclerView.ViewHolder holder) {
+        public void onViewRecycled(@NonNull RecyclerView.ViewHolder holder) {
             super.onViewRecycled(holder);
             if (holder instanceof BannerViewHolder) {
                 if (bannerWrapper != null) {
@@ -201,7 +204,7 @@ public class CoordinatorLayoutActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(RecyclerView.ViewHolder listViewHolder, int position) {
+        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder listViewHolder, int position) {
             if (getItemViewType(position) == VIEW_TYPE_TEXT) {
                 ListItemHolder holder = (ListItemHolder) listViewHolder;
                 String title = (position == 0) ? "Multiple banners in RecyclerView integration" : "Lorem ipsum dolor sit amet";

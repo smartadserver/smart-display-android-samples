@@ -1,6 +1,8 @@
 package com.smartadserver.android.sassample.util;
 
 import android.graphics.Bitmap;
+
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -25,7 +27,7 @@ public class ListNativeAdWithMediaHolder extends RecyclerView.ViewHolder {
     public SASNativeAdMediaView mediaView;
     public SASAdChoicesView adChoicesView;
 
-    public ListNativeAdWithMediaHolder(View itemView) {
+    public ListNativeAdWithMediaHolder(@NonNull View itemView) {
         super(itemView);
 
         textViewTitle = (TextView) itemView.findViewById(R.id.titleLabel);

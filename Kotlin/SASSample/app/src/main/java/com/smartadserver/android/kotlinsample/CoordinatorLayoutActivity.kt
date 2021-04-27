@@ -24,7 +24,7 @@ class CoordinatorLayoutActivity : AppCompatActivity() {
     private val supplyChainObjectString: String? = null // "1.0,1!exchange1.com,1234,1,publisher,publisher.com";
 
     // Ad Placement constant
-    private val adPlacement = SASAdPlacement(104808, "663531", 15140, "", supplyChainObjectString)
+    private val adPlacement = SASAdPlacement(104808, 663531, 15140, "", supplyChainObjectString)
 
     private val bannerViewHolderWrapper by lazy { BannerViewHolderWrapper(this) }
 

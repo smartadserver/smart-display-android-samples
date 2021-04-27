@@ -1,6 +1,9 @@
 package com.smartadserver.android.sassample;
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -22,7 +25,7 @@ public class RewardedVideoActivity extends AppCompatActivity {
      *****************************************/
     private final static String TAG = "RewardedVideoActivity";
     private final static int SITE_ID = 104808;
-    private final static String PAGE_ID = "795153";
+    private final static int PAGE_ID = 795153;
     private final static int FORMAT_ID = 12167;
     private final static String TARGET = "rewardedvideo";
 
@@ -51,7 +54,7 @@ public class RewardedVideoActivity extends AppCompatActivity {
      * performs Activity initialization after creation
      */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rewarded_video);
 
@@ -126,36 +129,36 @@ public class RewardedVideoActivity extends AppCompatActivity {
     private void initRewardedVideoListener() {
         mRewardedVideoListener = new SASRewardedVideoManager.RewardedVideoListener() {
             @Override
-            public void onRewardedVideoAdLoaded(SASRewardedVideoManager rewardedVideoManager, SASAdElement adElement) {
+            public void onRewardedVideoAdLoaded(@NonNull SASRewardedVideoManager rewardedVideoManager, @NonNull SASAdElement adElement) {
                 Log.i(RewardedVideoActivity.TAG, "RewardedVideo Ad loading completed.");
                 enableShowButton(true);
             }
 
             @Override
-            public void onRewardedVideoAdFailedToLoad(SASRewardedVideoManager rewardedVideoManager, Exception exception) {
+            public void onRewardedVideoAdFailedToLoad(@NonNull SASRewardedVideoManager rewardedVideoManager, @NonNull Exception exception) {
                 Log.i(RewardedVideoActivity.TAG, "RewardedVideo Ad loading failed with exception: " + exception.getLocalizedMessage());
                 enableShowButton(false);
             }
 
             @Override
-            public void onRewardedVideoAdShown(SASRewardedVideoManager rewardedVideoManager) {
+            public void onRewardedVideoAdShown(@NonNull SASRewardedVideoManager rewardedVideoManager) {
                 Log.i(TAG, "RewardedVideo ad is shown.");
                 enableShowButton(false);
             }
 
             @Override
-            public void onRewardedVideoAdFailedToShow(SASRewardedVideoManager rewardedVideoManager, Exception exception) {
+            public void onRewardedVideoAdFailedToShow(@NonNull SASRewardedVideoManager rewardedVideoManager, @NonNull Exception exception) {
                 Log.i(RewardedVideoActivity.TAG, "RewardedVideo playback failed with exception: " + exception.getLocalizedMessage());
                 enableShowButton(false);
             }
 
             @Override
-            public void onRewardedVideoAdClosed(SASRewardedVideoManager rewardedVideoManager) {
+            public void onRewardedVideoAdClosed(@NonNull SASRewardedVideoManager rewardedVideoManager) {
                 Log.i(RewardedVideoActivity.TAG, "RewardedVideo closed.");
             }
 
             @Override
-            public void onRewardReceived(SASRewardedVideoManager rewardedVideoManager, SASReward reward) {
+            public void onRewardReceived(@NonNull SASRewardedVideoManager rewardedVideoManager, @NonNull SASReward reward) {
                 if (reward != null) {
                     Log.i(RewardedVideoActivity.TAG, "RewardedVideo collected a reward.");
                     Log.i(RewardedVideoActivity.TAG, "User should be rewarded with: " + reward.getAmount() + " " + reward.getCurrency() + ".");
@@ -163,17 +166,17 @@ public class RewardedVideoActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onRewardedVideoAdClicked(SASRewardedVideoManager rewardedVideoManager) {
+            public void onRewardedVideoAdClicked(@NonNull SASRewardedVideoManager rewardedVideoManager) {
                 Log.i(RewardedVideoActivity.TAG, "RewardedVideo clicked.");
             }
 
             @Override
-            public void onRewardedVideoEvent(SASRewardedVideoManager rewardedVideoManager, int videoEvent) {
+            public void onRewardedVideoEvent(@NonNull SASRewardedVideoManager rewardedVideoManager, int videoEvent) {
                 Log.i(RewardedVideoActivity.TAG, "RewardedVideo did send event: " + videoEvent);
             }
 
             @Override
-            public void onRewardedVideoEndCardDisplayed(SASRewardedVideoManager rewardedVideoManager, ViewGroup endCardView) {
+            public void onRewardedVideoEndCardDisplayed(@NonNull SASRewardedVideoManager rewardedVideoManager, @NonNull ViewGroup endCardView) {
                 Log.i(RewardedVideoActivity.TAG, "RewardedVideo HTML EndCard displayed.");
             }
         };

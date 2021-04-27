@@ -22,9 +22,9 @@ class RecyclerViewActivity : AppCompatActivity() {
     private val supplyChainObjectString: String? = null // "1.0,1!exchange1.com,1234,1,publisher,publisher.com";
 
     // Needed placements
-    private val bannerPlacement = SASAdPlacement(104808, "663262", 15140, "", supplyChainObjectString)
-    private val parallaxPlacement = SASAdPlacement(104808, "663531", 15140, "", supplyChainObjectString)
-    private val videoReadPlacement = SASAdPlacement(104808, "663530", 15140, "", supplyChainObjectString)
+    private val bannerPlacement = SASAdPlacement(104808, 663262, 15140, "", supplyChainObjectString)
+    private val parallaxPlacement = SASAdPlacement(104808, 663531, 15140, "", supplyChainObjectString)
+    private val videoReadPlacement = SASAdPlacement(104808, 663530, 15140, "", supplyChainObjectString)
 
     private val adSpacing = 6
 

@@ -24,7 +24,7 @@ class InAppBiddingInterstitialActivity : AppCompatActivity() {
     // Manager object that will handle all bidding ad calls.
     private val biddingManager by lazy {
         // Create needed SASAdPlacement
-        val adPlacement = SASAdPlacement(104808, "1160279", 85867, "interstitial-inapp-bidding")
+        val adPlacement = SASAdPlacement(104808, 1160279, 85867, "interstitial-inapp-bidding")
 
         // Create the bidding manager with appropriate Context, SASAdPlacement, Format Type, Currency and Listener
         SASBiddingManager(this, adPlacement, SASBiddingFormatType.INTERSTITIAL, "EUR", object : SASBiddingManager.SASBiddingManagerListener {
@@ -55,47 +55,47 @@ class InAppBiddingInterstitialActivity : AppCompatActivity() {
     private val interstitialListener by lazy {
         object : SASInterstitialManager.InterstitialListener {
             override fun onInterstitialAdLoaded(
-                interstitialManager: SASInterstitialManager?,
-                adElement: SASAdElement?
+                interstitialManager: SASInterstitialManager,
+                adElement: SASAdElement
             ) {
                 Log.i("Sample", "Interstitial loading completed.")
 
                 // In our case we decide to directly show the interstitial
-                interstitialManager?.show()
+                interstitialManager.show()
                 updateUiStatus()
             }
 
             override fun onInterstitialAdFailedToLoad(
-                interstitialManager: SASInterstitialManager?,
-                e: Exception?
+                interstitialManager: SASInterstitialManager,
+                e: Exception
             ) {
                 Log.i("Sample", "Interstitial failed to load.")
                 updateUiStatus()
             }
 
-            override fun onInterstitialAdShown(interstitialManager: SASInterstitialManager?) {
+            override fun onInterstitialAdShown(interstitialManager: SASInterstitialManager) {
                 Log.i("Sample", "Interstitial was shown.")
                 updateUiStatus()
             }
 
             override fun onInterstitialAdFailedToShow(
-                interstitialManager: SASInterstitialManager?,
-                e: Exception?
+                interstitialManager: SASInterstitialManager,
+                e: Exception
             ) {
                 Log.i("Sample", "Interstitial failed to show: $e")
                 updateUiStatus()
             }
 
-            override fun onInterstitialAdDismissed(interstitialManager: SASInterstitialManager?) {
+            override fun onInterstitialAdDismissed(interstitialManager: SASInterstitialManager) {
                 Log.i("Sample", "Interstitial was dismissed.")
             }
 
-            override fun onInterstitialAdClicked(interstitialManager: SASInterstitialManager?) {
+            override fun onInterstitialAdClicked(interstitialManager: SASInterstitialManager) {
                 Log.i("Sample", "Interstitial was clicked.")
             }
 
             override fun onInterstitialAdVideoEvent(
-                interstitialManager: SASInterstitialManager?,
+                interstitialManager: SASInterstitialManager,
                 event: Int
             ) {
                 Log.i("Sample", "Video event $event was triggered on Interstitial.")

@@ -2,6 +2,7 @@ package com.smartadserver.android.sassample;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -29,7 +30,7 @@ public class InAppBiddingBannerActivity extends AppCompatActivity implements SAS
      * Ad Constants
      *****************************************/
     private final static SASAdPlacement BANNER_PLACEMENT = new SASAdPlacement(104808,
-            "1160279",
+            1160279,
             85867,
             "banner-inapp-bidding");
 
@@ -55,7 +56,7 @@ public class InAppBiddingBannerActivity extends AppCompatActivity implements SAS
      * performs Activity initialization after creation
      */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inapp_bidding_banner);
 
@@ -127,42 +128,42 @@ public class InAppBiddingBannerActivity extends AppCompatActivity implements SAS
         // Set the Banner listener
         bannerView.setBannerListener(new SASBannerView.BannerListener() {
             @Override
-            public void onBannerAdLoaded(SASBannerView bannerView, SASAdElement adElement) {
+            public void onBannerAdLoaded(@NonNull SASBannerView bannerView, @NonNull SASAdElement adElement) {
                 Log.i("Sample", "Banner loading completed");
             }
 
             @Override
-            public void onBannerAdFailedToLoad(SASBannerView bannerView, Exception e) {
+            public void onBannerAdFailedToLoad(@NonNull SASBannerView bannerView, @NonNull Exception e) {
                 Log.i("Sample", "Banner loading failed: " + e.getMessage());
             }
 
             @Override
-            public void onBannerAdClicked(SASBannerView bannerView) {
+            public void onBannerAdClicked(@NonNull SASBannerView bannerView) {
                 Log.i("Sample", "Banner was clicked");
             }
 
             @Override
-            public void onBannerAdExpanded(SASBannerView bannerView) {
+            public void onBannerAdExpanded(@NonNull SASBannerView bannerView) {
                 Log.i("Sample", "Banner was expanded");
             }
 
             @Override
-            public void onBannerAdCollapsed(SASBannerView bannerView) {
+            public void onBannerAdCollapsed(@NonNull SASBannerView bannerView) {
                 Log.i("Sample", "Banner was collapsed");
             }
 
             @Override
-            public void onBannerAdResized(SASBannerView bannerView) {
+            public void onBannerAdResized(@NonNull SASBannerView bannerView) {
                 Log.i("Sample", "Banner was resized");
             }
 
             @Override
-            public void onBannerAdClosed(SASBannerView bannerView) {
+            public void onBannerAdClosed(@NonNull SASBannerView bannerView) {
                 Log.i("Sample", "Banner was closed");
             }
 
             @Override
-            public void onBannerAdVideoEvent(SASBannerView bannerView, int videoEvent) {
+            public void onBannerAdVideoEvent(@NonNull SASBannerView bannerView, int videoEvent) {
                 Log.i("Sample", "Video event " + videoEvent + " was triggered on Banner");
             }
         });

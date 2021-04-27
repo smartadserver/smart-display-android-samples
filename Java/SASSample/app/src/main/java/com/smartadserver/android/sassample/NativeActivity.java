@@ -8,6 +8,9 @@ import java.util.HashSet;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,8 +35,8 @@ public class NativeActivity extends AppCompatActivity {
      * Ad Constants
      *****************************************/
     private final static int SITE_ID = 104808;
-    private final static String PAGE_ID = "720265";
-    private final static String PAGE_ID_WITH_MEDIA = "692588";
+    private final static int PAGE_ID = 720265;
+    private final static int PAGE_ID_WITH_MEDIA = 692588;
     private final static int FORMAT_ID = 15140;
     private final static String TARGET = "";
 
@@ -65,7 +68,7 @@ public class NativeActivity extends AppCompatActivity {
      * Performs Activity initialization after creation
      */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_native);
 
@@ -97,7 +100,7 @@ public class NativeActivity extends AppCompatActivity {
     private void createAndRequestNativeAd() {
 
         // Find correct PageID for ad
-        String pageID = NativeActivity.PAGE_ID;
+        int pageID = NativeActivity.PAGE_ID;
         if (mAdWithMedia) {
             pageID = NativeActivity.PAGE_ID_WITH_MEDIA;
         }
@@ -111,14 +114,14 @@ public class NativeActivity extends AppCompatActivity {
         // Create the native ad manager listener.
         mNativeAdManager.setNativeAdListener(new SASNativeAdManager.NativeAdListener() {
             @Override
-            public void onNativeAdLoaded(SASNativeAdElement nativeAdElement) {
+            public void onNativeAdLoaded(@NonNull SASNativeAdElement nativeAdElement) {
                 mCurrentNativeAd = nativeAdElement;
                 mIsAdLoaded = true;
 
                 // Download icon for native ad
                 if (nativeAdElement.getIcon() != null) {
                     String iconUrl = nativeAdElement.getIcon().getUrl();
-                    if (iconUrl != null && iconUrl.length() > 0) {
+                    if (iconUrl.length() > 0) {
                         mNativeAdIconBitmap  =  scaledBitmapFromUrl(iconUrl, nativeAdElement.getIcon().getWidth(), nativeAdElement.getIcon().getHeight());
                     }
                 }
@@ -126,7 +129,7 @@ public class NativeActivity extends AppCompatActivity {
                 // Download cover for native ad
                 if (nativeAdElement.getCoverImage() != null) {
                     String coverUrl = nativeAdElement.getCoverImage().getUrl();
-                    if (coverUrl != null && coverUrl.length() > 0) {
+                    if (coverUrl.length() > 0) {
                         mNativeAdCoverBitmap  =  scaledBitmapFromUrl(coverUrl, nativeAdElement.getCoverImage().getWidth(), nativeAdElement.getCoverImage().getHeight());
                     }
                 }
@@ -134,13 +137,15 @@ public class NativeActivity extends AppCompatActivity {
                 mRecyclerView.post(new Runnable() {
                     @Override
                     public void run() {
-                        mRecyclerView.getAdapter().notifyItemChanged(AD_POSITION);
+                        if (mRecyclerView.getAdapter() != null) {
+                            mRecyclerView.getAdapter().notifyItemChanged(AD_POSITION);
+                        }
                     }
                 });
             }
 
             @Override
-            public void onNativeAdFailedToLoad(Exception e) {
+            public void onNativeAdFailedToLoad(@NonNull Exception e) {
                 Log.i("NativeActivity", "Native Ad Loading Failed.");
             }
         });
@@ -195,7 +200,8 @@ public class NativeActivity extends AppCompatActivity {
         }
 
         @Override
-        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        @NonNull
+        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             if (viewType == TYPE_AD_WITH_MEDIA) {
                 View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_native_ad_media, parent, false);
                 ListNativeAdWithMediaHolder mediaHolder = new ListNativeAdWithMediaHolder(v);
@@ -211,7 +217,7 @@ public class NativeActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(RecyclerView.ViewHolder listViewHolder, final int position) {
+        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder listViewHolder, final int position) {
 
             // It's the ad position, configure the viewHolder for the Ad
             if (isAdViewAtPosition(position)) {
@@ -292,7 +298,7 @@ public class NativeActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onViewRecycled(RecyclerView.ViewHolder holder) {
+        public void onViewRecycled(@NonNull RecyclerView.ViewHolder holder) {
             super.onViewRecycled(holder);
             if (mCurrentNativeAd != null) {
                 mCurrentNativeAd.unregisterView(holder.itemView);

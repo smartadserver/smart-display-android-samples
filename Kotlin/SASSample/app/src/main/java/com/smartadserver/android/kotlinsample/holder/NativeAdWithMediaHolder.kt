@@ -21,9 +21,9 @@ class NativeAdWithMediaHolder(inflater: LayoutInflater, parent: ViewGroup) :
     val adChoicesView: SASAdChoicesView = itemView.adChoicesView
 
     fun configure(
-        title: String,
-        subtitle: String,
-        calltoAction: String,
+        title: String?,
+        subtitle: String?,
+        calltoAction: String?,
         iconImage: Bitmap?,
         coverImage: Bitmap?
     ) {

@@ -2,6 +2,7 @@ package com.smartadserver.android.sassample;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -24,7 +25,7 @@ public class InAppBiddingInterstitialActivity extends AppCompatActivity implemen
      * Ad Constants
      *****************************************/
     private final static SASAdPlacement INTERSTITIAL_PLACEMENT = new SASAdPlacement(104808,
-            "1160279",
+            1160279,
             85867,
             "interstitial-inapp-bidding");
 
@@ -51,7 +52,7 @@ public class InAppBiddingInterstitialActivity extends AppCompatActivity implemen
      * performs Activity initialization after creation
      */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inapp_bidding_interstitial);
 
@@ -166,7 +167,7 @@ public class InAppBiddingInterstitialActivity extends AppCompatActivity implemen
         // Create the InterstitialListener that will be used by all future created Interstitial Managers
         interstitialListener = new SASInterstitialManager.InterstitialListener() {
             @Override
-            public void onInterstitialAdLoaded(SASInterstitialManager interstitialManager, SASAdElement adElement) {
+            public void onInterstitialAdLoaded(@NonNull SASInterstitialManager interstitialManager, @NonNull SASAdElement adElement) {
                 Log.i("Sample", "Interstitial loading completed");
 
                 // In our case we decide to directly show the interstitial
@@ -175,35 +176,35 @@ public class InAppBiddingInterstitialActivity extends AppCompatActivity implemen
             }
 
             @Override
-            public void onInterstitialAdFailedToLoad(SASInterstitialManager interstitialManager, Exception e) {
+            public void onInterstitialAdFailedToLoad(@NonNull SASInterstitialManager interstitialManager, @NonNull Exception e) {
                 Log.i("Sample", "Interstitial loading failed (" + e.getMessage() + ")");
                 updateUiStatus();
             }
 
             @Override
-            public void onInterstitialAdShown(SASInterstitialManager interstitialManager) {
+            public void onInterstitialAdShown(@NonNull SASInterstitialManager interstitialManager) {
                 Log.i("Sample", "Interstitial was shown");
                 updateUiStatus();
             }
 
             @Override
-            public void onInterstitialAdFailedToShow(SASInterstitialManager interstitialManager, Exception e) {
+            public void onInterstitialAdFailedToShow(@NonNull SASInterstitialManager interstitialManager, Exception e) {
                 Log.i("Sample", "Interstitial failed to show (" + e.getMessage() + ")");
                 updateUiStatus();
             }
 
             @Override
-            public void onInterstitialAdClicked(SASInterstitialManager interstitialManager) {
+            public void onInterstitialAdClicked(@NonNull SASInterstitialManager interstitialManager) {
                 Log.i("Sample", "Interstitial was clicked");
             }
 
             @Override
-            public void onInterstitialAdDismissed(SASInterstitialManager interstitialManager) {
+            public void onInterstitialAdDismissed(@NonNull SASInterstitialManager interstitialManager) {
                 Log.i("Sample", "Interstitial was dismissed");
             }
 
             @Override
-            public void onInterstitialAdVideoEvent(SASInterstitialManager interstitialManager, int videoEvent) {
+            public void onInterstitialAdVideoEvent(@NonNull SASInterstitialManager interstitialManager, int videoEvent) {
                 Log.i("Sample", "Video event " + videoEvent + " was triggered on Interstitial");
             }
         };

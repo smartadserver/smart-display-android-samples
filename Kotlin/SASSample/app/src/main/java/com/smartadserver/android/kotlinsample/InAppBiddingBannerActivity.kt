@@ -23,7 +23,7 @@ class InAppBiddingBannerActivity : AppCompatActivity() {
     // Manager object that will handle all bidding ad calls.
     private val biddingManager by lazy {
         // Create needed SASAdPlacement
-        val adPlacement = SASAdPlacement(104808, "1160279", 85867, "banner-inapp-bidding")
+        val adPlacement = SASAdPlacement(104808, 1160279, 85867, "banner-inapp-bidding")
 
         // Create the bidding manager with appropriate Context, SASAdPlacement, Format Type, Currency and Listener
         SASBiddingManager(this, adPlacement, SASBiddingFormatType.BANNER, "EUR", object : SASBiddingManager.SASBiddingManagerListener {
@@ -64,35 +64,35 @@ class InAppBiddingBannerActivity : AppCompatActivity() {
 
         // Set the banner listener
         bannerView.bannerListener = object : SASBannerView.BannerListener {
-            override fun onBannerAdLoaded(banner: SASBannerView?, adElement: SASAdElement?) {
+            override fun onBannerAdLoaded(banner: SASBannerView, adElement: SASAdElement) {
                 Log.i("Sample", "Banner loading completed")
             }
 
-            override fun onBannerAdFailedToLoad(banner: SASBannerView?, e: Exception?) {
+            override fun onBannerAdFailedToLoad(banner: SASBannerView, e: Exception) {
                 Log.i("Sample", "Banner loading failed: $e")
             }
 
-            override fun onBannerAdClicked(banner: SASBannerView?) {
+            override fun onBannerAdClicked(banner: SASBannerView) {
                 Log.i("Sample", "Banner was clicked")
             }
 
-            override fun onBannerAdExpanded(banner: SASBannerView?) {
+            override fun onBannerAdExpanded(banner: SASBannerView) {
                 Log.i("Sample", "Banner was expanded")
             }
 
-            override fun onBannerAdCollapsed(banner: SASBannerView?) {
+            override fun onBannerAdCollapsed(banner: SASBannerView) {
                 Log.i("Sample", "Banner was collapsed")
             }
 
-            override fun onBannerAdClosed(banner: SASBannerView?) {
+            override fun onBannerAdClosed(banner: SASBannerView) {
                 Log.i("Sample", "Banner was closed")
             }
 
-            override fun onBannerAdResized(banner: SASBannerView?) {
+            override fun onBannerAdResized(banner: SASBannerView) {
                 Log.i("Sample", "Banner was resized")
             }
 
-            override fun onBannerAdVideoEvent(banner: SASBannerView?, event: Int) {
+            override fun onBannerAdVideoEvent(banner: SASBannerView, event: Int) {
                 Log.i("Sample", "Video event $event was triggered on banner")
             }
         }
