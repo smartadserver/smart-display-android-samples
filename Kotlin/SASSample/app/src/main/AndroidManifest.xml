@@ -14,7 +14,8 @@
             android:theme="@style/AppTheme">
         <activity
                 android:name="com.smartadserver.android.kotlinsample.MainActivity"
-                android:label="@string/title_activity_main_short">
+                android:label="@string/title_activity_main_short"
+                android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
