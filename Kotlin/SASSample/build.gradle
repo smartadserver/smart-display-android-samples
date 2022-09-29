@@ -24,7 +24,7 @@ allprojects {
         maven { url 'https://packagecloud.io/smartadserver/android/maven2' }
 
         // to add Huawei support, uncomment the following line
-        // maven { url 'http://developer.huawei.com/repo/' }
+        //maven { url 'https://developer.huawei.com/repo/' }
     }
 }
 

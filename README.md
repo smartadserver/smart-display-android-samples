@@ -10,4 +10,4 @@ This repository contains sample applications demonstrating how to integrate the 
 ## Installation
 
 Simply open, compile and run the sample project with Android Studio.
-For further information on the _Smart Android Display SDK_ installation and ad formats integration in your application, please check [the complete documentation](http://documentation.smartadserver.com/displaySDK/).
+For further information on the _Smart Android Display SDK_ installation and ad formats integration in your application, please check [the complete documentation](https://documentation.smartadserver.com/displaySDK/).
