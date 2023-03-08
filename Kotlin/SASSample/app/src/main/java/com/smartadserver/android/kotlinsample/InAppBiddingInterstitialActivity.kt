@@ -3,6 +3,7 @@ package com.smartadserver.android.kotlinsample
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.smartadserver.android.kotlinsample.databinding.ActivityInappBiddingInterstitialBinding
 import com.smartadserver.android.library.headerbidding.SASBiddingAdResponse
 import com.smartadserver.android.library.headerbidding.SASBiddingFormatType
 import com.smartadserver.android.library.headerbidding.SASBiddingManager
@@ -10,7 +11,6 @@ import com.smartadserver.android.library.model.SASAdElement
 import com.smartadserver.android.library.model.SASAdPlacement
 import com.smartadserver.android.library.ui.SASInterstitialManager
 import com.smartadserver.android.library.util.SASUtil
-import kotlinx.android.synthetic.main.activity_inapp_bidding_interstitial.*
 
 /**
  * Simple activity featuring an interstitial ad.
@@ -20,6 +20,9 @@ class InAppBiddingInterstitialActivity : AppCompatActivity() {
     private var isBiddingManagerLoading = false
 
     private var biddingAdResponse: SASBiddingAdResponse? = null
+
+    // Binding object to retrieve UI elements
+    private val binding : ActivityInappBiddingInterstitialBinding by lazy { ActivityInappBiddingInterstitialBinding.inflate(layoutInflater) }
 
     // Manager object that will handle all bidding ad calls.
     private val biddingManager by lazy {
@@ -105,13 +108,15 @@ class InAppBiddingInterstitialActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_inapp_bidding_interstitial)
+
+        // set content view from binding
+        setContentView(binding.root)
 
         // Setup loadAd button click listener
-        loadButton.setOnClickListener { loadBiddingAd() }
+        binding.loadButton.setOnClickListener { loadBiddingAd() }
 
         // Setup showAd button click listener
-        showButton.setOnClickListener { showBiddingAd() }
+        binding.showButton.setOnClickListener { showBiddingAd() }
     }
 
     override fun onDestroy() {
@@ -156,8 +161,8 @@ class InAppBiddingInterstitialActivity : AppCompatActivity() {
                 manager.loadAd()
             }
 
-            showButton.post {
-                showButton.isEnabled = false
+            binding.showButton.post {
+                binding.showButton.isEnabled = false
             }
         }
     }
@@ -168,11 +173,11 @@ class InAppBiddingInterstitialActivity : AppCompatActivity() {
     private fun updateUiStatus() {
         SASUtil.getMainLooperHandler().post {
             // Buttons
-            loadButton.isEnabled = !isBiddingManagerLoading
-            showButton.isEnabled = hasValidBiddingAdResponse()
+            binding.loadButton.isEnabled = !isBiddingManagerLoading
+            binding.showButton.isEnabled = hasValidBiddingAdResponse()
 
             // Status textview
-            statusTextView.text = when {
+            binding.statusTextView.text = when {
                 isBiddingManagerLoading -> "loading a bidding ad…"
                 biddingAdResponse != null -> biddingAdResponse?.let {
                     "bidding response: ${it.biddingAdPrice.cpm} ${it.biddingAdPrice.currency}"

@@ -9,11 +9,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.smartadserver.android.kotlinsample.databinding.ActivityCoordinatorLayoutBinding
+import com.smartadserver.android.kotlinsample.databinding.ListBannerHolderBinding
+import com.smartadserver.android.kotlinsample.databinding.ListItemBinding
 import com.smartadserver.android.library.model.SASAdPlacement
 import com.smartadserver.android.kotlinsample.holder.BannerViewHolder
 import com.smartadserver.android.kotlinsample.holder.BannerViewHolderWrapper
 import com.smartadserver.android.kotlinsample.holder.ListItemHolder
-import kotlinx.android.synthetic.main.activity_recycler.*
 
 private const val adPosition = 10
 
@@ -31,6 +33,9 @@ class CoordinatorLayoutActivity : AppCompatActivity() {
     private var appBarOffset = 0
     private var actionBarHeight = 0
 
+    // Binding object to retrieve UI elements
+    private val binding : ActivityCoordinatorLayoutBinding by lazy { ActivityCoordinatorLayoutBinding.inflate(layoutInflater) }
+
     private inner class ListLayoutAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         private val viewTypeText = 0
@@ -45,9 +50,9 @@ class CoordinatorLayoutActivity : AppCompatActivity() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             val inflater = LayoutInflater.from(parent.context)
             return if (viewType == viewTypeText) {
-                ListItemHolder(inflater, parent) // Create classic item holder.
+                ListItemHolder(ListItemBinding.inflate(inflater, parent, false)) // Create classic item holder.
             } else {
-                BannerViewHolder(inflater, parent) // Create banner view holder.
+                BannerViewHolder(ListBannerHolderBinding.inflate(inflater, parent, false)) // Create banner view holder.
             }
         }
 
@@ -80,10 +85,12 @@ class CoordinatorLayoutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_coordinator_layout)
+
+        // set content view from binding
+        setContentView(binding.root)
 
         // Set up recycler view
-        recyclerView.run {
+        binding.recyclerView.run {
             layoutManager = LinearLayoutManager(context)
             adapter = ListLayoutAdapter()
             addItemDecoration(
@@ -119,12 +126,12 @@ class CoordinatorLayoutActivity : AppCompatActivity() {
 
         // add a OnGlobalLayoutListener to execute adaptBannerHeight method once the activity has its new size set
         // (otherwise it uses previous orientation's size which is not what we want).
-        recyclerView.post {
-            recyclerView.viewTreeObserver.addOnGlobalLayoutListener(object :
+        binding.recyclerView.post {
+            binding.recyclerView.viewTreeObserver.addOnGlobalLayoutListener(object :
                 ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
-                    recyclerView.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                    recyclerView.post {
+                    binding.recyclerView.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                    binding.recyclerView.post {
                         updateBannersHeight()
                     }
                 }

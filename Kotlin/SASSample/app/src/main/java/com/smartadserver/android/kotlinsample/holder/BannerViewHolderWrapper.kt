@@ -1,16 +1,13 @@
 package com.smartadserver.android.kotlinsample.holder
 
 import android.content.Context
-import android.util.DisplayMetrics
 import android.util.Log
-import android.view.Display
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.smartadserver.android.library.model.SASAdElement
 import com.smartadserver.android.library.model.SASAdPlacement
 import com.smartadserver.android.library.ui.SASBannerView
-import kotlinx.android.synthetic.main.list_banner_holder.view.*
 import kotlin.math.max
 import kotlin.math.min
 
@@ -45,7 +42,7 @@ class BannerViewHolderWrapper(context: Context) {
             // If holder is not null, add banner as a child
             // Then update banner size with a post (so it is executed when all layout has been update)
             bannerViewHolder?.let {
-                val container: ViewGroup = it.itemView.bannerContainer
+                val container: ViewGroup = it.binding.bannerContainer
                 container.removeAllViews()
                 container.addView(bannerView)
 
@@ -110,7 +107,7 @@ class BannerViewHolderWrapper(context: Context) {
         bannerViewHolder?.run {
             itemView.layoutParams = itemView.layoutParams.apply { this.height = ViewGroup.LayoutParams.WRAP_CONTENT }
 
-            val placeHolder: TextView = itemView.placeHolder
+            val placeHolder: TextView = binding.placeHolder
             placeHolder.visibility = View.GONE
 
             // Update banner layout to fit the proper height
@@ -127,15 +124,9 @@ class BannerViewHolderWrapper(context: Context) {
                 var height = defaultHeight
                 val ratio: Double = bannerView.ratio
                 if (ratio > 0) {
-
                     // retrieve screen width, as the banner stretches across the whole width
-                    val display: Display? = bannerView.context.display
-                    display?.let {
-                        val displayMetrics = DisplayMetrics()
-                        it.getRealMetrics(displayMetrics)
-                        val width = displayMetrics.widthPixels
-                        height = (width / ratio).toInt()
-                    }
+                    val width = bannerView.context.resources.displayMetrics.widthPixels
+                    height = (width / ratio).toInt()
                 }
 
                 // Resize the table view cell if an height value is available

@@ -3,26 +3,23 @@ package com.smartadserver.android.kotlinsample.holder
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.view.Gravity
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.smartadserver.android.kotlinsample.R
-import kotlinx.android.synthetic.main.list_native_ad.view.*
+import com.smartadserver.android.kotlinsample.databinding.ListNativeAdBinding
 
-class NativeAdHolder(inflater: LayoutInflater, parent: ViewGroup) :
-    RecyclerView.ViewHolder(inflater.inflate(R.layout.list_native_ad, parent, false)) {
+class NativeAdHolder(binding: ListNativeAdBinding) :
+    RecyclerView.ViewHolder(binding.root) {
 
-    private val indexTextView = itemView.indexLabel
-    private val titleTextView = itemView.titleLabel
-    private val subtitleTextView = itemView.subtitleLabel
-    private val button = itemView.callToActionButton
-    private val subParentLayout = itemView.subParentLayout
-    private val adOptionsLayout = itemView.adOptionsLayout
+    private val indexTextView = binding.indexLabel
+    private val titleTextView = binding.titleLabel
+    private val subtitleTextView = binding.subtitleLabel
+    private val button = binding.callToActionButton
+    private val subParentLayout = binding.subParentLayout
+    private val adOptionsLayout = binding.adOptionsLayout
 
     // Optional, only for items that are ads.
-    val iconImageView: ImageView = itemView.iconImageView
+    val iconImageView: ImageView = binding.iconImageView
 
     fun configureForContent(title: String, subtitle: String, position: Int) {
         titleTextView.text = title

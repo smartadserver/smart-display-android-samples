@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.webkit.WebView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import com.smartadserver.android.kotlinsample.databinding.ActivityMainBinding
 import com.smartadserver.android.library.util.SASConfiguration
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,7 +14,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        // Binding object to retrieve UI elements
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // First of all, configure the SDK
         SASConfiguration.getSharedInstance().configure(this, siteId)
@@ -33,17 +36,17 @@ class MainActivity : AppCompatActivity() {
         )
 
         // Create header and footer
-        val header = layoutInflater.inflate(R.layout.activity_main_header, listView, false)
-        val footer = layoutInflater.inflate(R.layout.activity_main_footer, listView, false)
+        val header = layoutInflater.inflate(R.layout.activity_main_header, binding.listView, false)
+        val footer = layoutInflater.inflate(R.layout.activity_main_footer, binding.listView, false)
 
         // Add header, footer and adapter to the list view
-        listView.run {
+        binding.listView.run {
             addHeaderView(header)
             addFooterView(footer)
             setAdapter(adapter)
         }
 
-        listView.setOnItemClickListener { _, _, position, _ ->
+        binding.listView.setOnItemClickListener { _, _, position, _ ->
             val activityClass = when (position) {
                 1 -> BannerActivity::class
                 2 -> InAppBiddingBannerActivity::class

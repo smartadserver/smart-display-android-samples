@@ -1,8 +1,7 @@
-apply plugin: 'com.android.application'
-
-apply plugin: 'kotlin-android'
-
-apply plugin: 'kotlin-android-extensions'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
 
 android {
     compileSdkVersion 33
@@ -21,6 +20,10 @@ android {
         }
     }
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     compileOptions {
         targetCompatibility = JavaVersion.VERSION_1_8
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -36,7 +39,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.5.0'
 
     // Smart Display SDK
-    implementation 'com.smartadserver.android:smart-display-sdk:7.20.0'
+    implementation 'com.smartadserver.android:smart-display-sdk:7.20.1'
 
     // to add Huawei support, uncomment the following line
     //implementation 'com.smartadserver.android:smart-core-sdk-huawei-support:1.0.0'

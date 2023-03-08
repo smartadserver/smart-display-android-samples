@@ -7,18 +7,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.smartadserver.android.library.ui.SASAdChoicesView
 import com.smartadserver.android.library.ui.SASNativeAdMediaView
 import com.smartadserver.android.kotlinsample.R
-import kotlinx.android.synthetic.main.list_native_ad_media.view.*
+import com.smartadserver.android.kotlinsample.databinding.ListNativeAdBinding
+import com.smartadserver.android.kotlinsample.databinding.ListNativeAdMediaBinding
 
-class NativeAdWithMediaHolder(inflater: LayoutInflater, parent: ViewGroup) :
-    RecyclerView.ViewHolder(inflater.inflate(R.layout.list_native_ad_media, parent, false)) {
+class NativeAdWithMediaHolder(binding: ListNativeAdMediaBinding) :
+    RecyclerView.ViewHolder(binding.root) {
 
-    private val titleTextView = itemView.titleLabel
-    private val subtitleTextView = itemView.subtitleLabel
-    private val button = itemView.callToActionButton
-    private val iconImageView = itemView.iconImageView
-    private val coverImageView = itemView.coverImageView
-    val mediaView: SASNativeAdMediaView = itemView.mediaView
-    val adChoicesView: SASAdChoicesView = itemView.adChoicesView
+    private val titleTextView = binding.titleLabel
+    private val subtitleTextView = binding.subtitleLabel
+    private val button = binding.callToActionButton
+    private val iconImageView = binding.iconImageView
+    private val coverImageView = binding.coverImageView
+    val mediaView: SASNativeAdMediaView = binding.mediaView
+    val adChoicesView: SASAdChoicesView = binding.adChoicesView
 
     fun configure(
         title: String?,

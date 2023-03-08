@@ -10,13 +10,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.smartadserver.android.kotlinsample.databinding.ActivityNativeBinding
+import com.smartadserver.android.kotlinsample.databinding.ListNativeAdBinding
+import com.smartadserver.android.kotlinsample.databinding.ListNativeAdMediaBinding
 import com.smartadserver.android.library.model.SASAdPlacement
 import com.smartadserver.android.library.model.SASNativeAdElement
 import com.smartadserver.android.library.model.SASNativeAdManager
 import com.smartadserver.android.library.ui.SASNativeAdMediaView
 import com.smartadserver.android.kotlinsample.holder.NativeAdHolder
 import com.smartadserver.android.kotlinsample.holder.NativeAdWithMediaHolder
-import kotlinx.android.synthetic.main.activity_native.*
 import java.io.IOException
 import java.io.InputStream
 import java.net.URL
@@ -60,9 +62,9 @@ class NativeAdActivity : AppCompatActivity() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             val inflater = LayoutInflater.from(parent.context)
             return if (viewType == mediaType) {
-                NativeAdWithMediaHolder(inflater, parent)
+                NativeAdWithMediaHolder(ListNativeAdMediaBinding.inflate(inflater, parent, false))
             } else {
-                NativeAdHolder(inflater, parent)
+                NativeAdHolder(ListNativeAdBinding.inflate(inflater, parent, false))
             }
         }
 
@@ -168,7 +170,10 @@ class NativeAdActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_native)
+
+        // Binding object to retrieve UI elements
+        val binding = ActivityNativeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // Do we want an ad with media?
         val adPlacement = if (intent.getBooleanExtra("withMedia", false)) {
@@ -178,7 +183,7 @@ class NativeAdActivity : AppCompatActivity() {
         }
 
         // Setup recyclerView
-        recyclerView.run {
+        binding.recyclerView.run {
             layoutManager = LinearLayoutManager(context)
             adapter = ListLayoutAdapter()
             addItemDecoration(
@@ -219,8 +224,8 @@ class NativeAdActivity : AppCompatActivity() {
                         }
                     }
 
-                    recyclerView.post {
-                        recyclerView.adapter?.notifyItemChanged(adPosition)
+                    binding.recyclerView.post {
+                        binding.recyclerView.adapter?.notifyItemChanged(adPosition)
                     }
                 }
             }

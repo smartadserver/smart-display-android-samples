@@ -3,10 +3,10 @@ package com.smartadserver.android.kotlinsample
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.smartadserver.android.kotlinsample.databinding.ActivityInterstitialBinding
 import com.smartadserver.android.library.model.SASAdElement
 import com.smartadserver.android.library.model.SASAdPlacement
 import com.smartadserver.android.library.ui.SASInterstitialManager
-import kotlinx.android.synthetic.main.activity_interstitial.*
 
 /**
  * Simple activity featuring an interstitial ad.
@@ -17,15 +17,19 @@ class InterstitialActivity : AppCompatActivity() {
     // More info here: https://help.smartadserver.com/s/article/Sellers-json-and-SupplyChain-Object
     private val supplyChainObjectString: String? = null // "1.0,1!exchange1.com,1234,1,publisher,publisher.com";
 
-
     // The SASInterstitialManager instance
     private val interstitialManager by lazy {
         SASInterstitialManager(this, SASAdPlacement(104808, 663264, 12167, "", supplyChainObjectString))
     }
 
+    // Binding object to retrieve UI elements
+    private val binding : ActivityInterstitialBinding by lazy { ActivityInterstitialBinding.inflate(layoutInflater) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_interstitial)
+
+        // set content view from binding
+        setContentView(binding.root)
 
         // Setup the interstitial manager listener
         interstitialManager.interstitialListener =
@@ -35,7 +39,7 @@ class InterstitialActivity : AppCompatActivity() {
                     adElement: SASAdElement
                 ) {
                     Log.i("Sample", "Interstitial loading completed.")
-                    showAdButton.post { showAdButton.isEnabled = true }
+                    binding.showAdButton.post { binding.showAdButton.isEnabled = true }
                 }
 
                 override fun onInterstitialAdFailedToLoad(
@@ -43,12 +47,12 @@ class InterstitialActivity : AppCompatActivity() {
                     e: Exception
                 ) {
                     Log.i("Sample", "Interstitial failed to load.")
-                    showAdButton.post { showAdButton.isEnabled = false }
+                    binding.showAdButton.post { binding.showAdButton.isEnabled = false }
                 }
 
                 override fun onInterstitialAdShown(interstitialManager: SASInterstitialManager) {
                     Log.i("Sample", "Interstitial was shown.")
-                    showAdButton.post { showAdButton.isEnabled = false }
+                    binding.showAdButton.post { binding.showAdButton.isEnabled = false }
                 }
 
                 override fun onInterstitialAdFailedToShow(
@@ -56,7 +60,7 @@ class InterstitialActivity : AppCompatActivity() {
                     e: Exception
                 ) {
                     Log.i("Sample", "Interstitial failed to show: $e")
-                    showAdButton.post { showAdButton.isEnabled = false }
+                    binding.showAdButton.post { binding.showAdButton.isEnabled = false }
                 }
 
                 override fun onInterstitialAdDismissed(interstitialManager: SASInterstitialManager) {
@@ -76,10 +80,10 @@ class InterstitialActivity : AppCompatActivity() {
             }
 
         // Setup loadAd button click listener
-        loadAdButton.setOnClickListener { interstitialManager.loadAd() }
+        binding.loadAdButton.setOnClickListener { interstitialManager.loadAd() }
 
         // Setup showAd button click listener
-        showAdButton.setOnClickListener {
+        binding.showAdButton.setOnClickListener {
             if (interstitialManager.isShowable) {
                 interstitialManager.show()
             } else {

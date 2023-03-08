@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.smartadserver.android.kotlinsample.databinding.ActivityBannerBinding
 import com.smartadserver.android.library.model.SASAdElement
 import com.smartadserver.android.library.model.SASAdPlacement
 import com.smartadserver.android.library.ui.SASBannerView
 import com.smartadserver.android.library.ui.SASRotatingImageLoader
-import kotlinx.android.synthetic.main.activity_banner.*
 
 /**
  * Simple activity featuring a banner ad.
@@ -23,16 +23,19 @@ class BannerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_banner)
+
+        // Binding object to retrieve UI elements
+        val binding = ActivityBannerBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // Add a loader view on the banner. This view covers the banner placement, to indicate profress, whenever the banner is loading an ad.
         // This is optional.
-        bannerView.loaderView = SASRotatingImageLoader(this).apply {
+        binding.bannerView.loaderView = SASRotatingImageLoader(this).apply {
             setBackgroundColor(ContextCompat.getColor(context, R.color.colorLoaderBackground))
         }
 
         // Set the banner listener
-        bannerView.bannerListener = object : SASBannerView.BannerListener {
+        binding.bannerView.bannerListener = object : SASBannerView.BannerListener {
             override fun onBannerAdLoaded(banner: SASBannerView, adElement: SASAdElement) {
                 Log.i("Sample", "Banner loading completed")
             }
@@ -66,10 +69,11 @@ class BannerActivity : AppCompatActivity() {
             }
         }
 
+
         // Set the button click listener
-        reloadButton.setOnClickListener { bannerView.loadAd(bannerPlacement) }
+        binding.reloadButton.setOnClickListener { binding.bannerView.loadAd(bannerPlacement) }
 
         // Load the ad
-        bannerView.loadAd(bannerPlacement)
+        binding.bannerView.loadAd(bannerPlacement)
     }
 }

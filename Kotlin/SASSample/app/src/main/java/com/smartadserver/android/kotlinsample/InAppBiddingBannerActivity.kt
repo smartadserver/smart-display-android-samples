@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.smartadserver.android.kotlinsample.databinding.ActivityInappBiddingBannerBinding
 import com.smartadserver.android.library.headerbidding.SASBiddingAdResponse
 import com.smartadserver.android.library.headerbidding.SASBiddingFormatType
 import com.smartadserver.android.library.headerbidding.SASBiddingManager
@@ -12,7 +13,6 @@ import com.smartadserver.android.library.model.SASAdPlacement
 import com.smartadserver.android.library.ui.SASBannerView
 import com.smartadserver.android.library.ui.SASRotatingImageLoader
 import com.smartadserver.android.library.util.SASUtil
-import kotlinx.android.synthetic.main.activity_inapp_bidding_banner.*
 
 
 /**
@@ -52,18 +52,23 @@ class InAppBiddingBannerActivity : AppCompatActivity() {
 
     private var biddingAdResponse: SASBiddingAdResponse? = null
 
+    // Binding object to retrieve UI elements
+    private val binding : ActivityInappBiddingBannerBinding by lazy { ActivityInappBiddingBannerBinding.inflate(layoutInflater) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_inapp_bidding_banner)
+
+        // set content view from binding
+        setContentView(binding.root)
 
         // Add a loader view on the banner. This view covers the banner placement, to indicate profress, whenever the banner is loading an ad.
         // This is optional.
-        bannerView.loaderView = SASRotatingImageLoader(this).apply {
+        binding.bannerView.loaderView = SASRotatingImageLoader(this).apply {
             setBackgroundColor(ContextCompat.getColor(context, R.color.colorLoaderBackground))
         }
 
         // Set the banner listener
-        bannerView.bannerListener = object : SASBannerView.BannerListener {
+        binding.bannerView.bannerListener = object : SASBannerView.BannerListener {
             override fun onBannerAdLoaded(banner: SASBannerView, adElement: SASAdElement) {
                 Log.i("Sample", "Banner loading completed")
             }
@@ -98,8 +103,8 @@ class InAppBiddingBannerActivity : AppCompatActivity() {
         }
 
         // Set the buttons click listener
-        loadButton.setOnClickListener { loadBiddingAd() }
-        showButton.setOnClickListener { showBiddingAd() }
+        binding.loadButton.setOnClickListener { loadBiddingAd() }
+        binding.showButton.setOnClickListener { showBiddingAd() }
 
         updateUiStatus()
     }
@@ -128,9 +133,9 @@ class InAppBiddingBannerActivity : AppCompatActivity() {
             // - biddingAdResponse.biddingAdPrice.currency
             //
             // If you decide not to use the bidding ad response, you can simply discard it.
-            bannerView.loadAd(it)
-            showButton.post {
-                showButton.isEnabled = false
+            binding.bannerView.loadAd(it)
+            binding.showButton.post {
+                binding.showButton.isEnabled = false
             }
         }
     }
@@ -141,11 +146,11 @@ class InAppBiddingBannerActivity : AppCompatActivity() {
     private fun updateUiStatus() {
         SASUtil.getMainLooperHandler().post {
             // Buttons
-            loadButton.isEnabled = !isBiddingManagerLoading
-            showButton.isEnabled = hasValidBiddingAdResponse()
+            binding.loadButton.isEnabled = !isBiddingManagerLoading
+            binding.showButton.isEnabled = hasValidBiddingAdResponse()
 
             // Status textview
-            statusTextView.text = when {
+            binding.statusTextView.text = when {
                 isBiddingManagerLoading -> "loading a bidding ad…"
                 biddingAdResponse != null -> biddingAdResponse?.let {
                     "bidding response: ${it.biddingAdPrice.cpm} ${it.biddingAdPrice.currency}"

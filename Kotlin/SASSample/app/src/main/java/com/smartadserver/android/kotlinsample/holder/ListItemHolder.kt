@@ -1,20 +1,17 @@
 package com.smartadserver.android.kotlinsample.holder
 
 import android.graphics.Color
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.smartadserver.android.kotlinsample.R
-import kotlinx.android.synthetic.main.list_item.view.*
+import com.smartadserver.android.kotlinsample.databinding.ListItemBinding
 
-class ListItemHolder(inflater: LayoutInflater, parent: ViewGroup) :
-    RecyclerView.ViewHolder(inflater.inflate(R.layout.list_item, parent, false)) {
+class ListItemHolder(private val binding: ListItemBinding) :
+    RecyclerView.ViewHolder(binding.root) {
 
-    private val indexTextView: TextView = itemView.indexTextView
-    private val titleTextView: TextView = itemView.titleTextView
-    private val subtitleTextView: TextView = itemView.subtitleTextView
+    private val indexTextView: TextView = binding.indexTextView
+    private val titleTextView: TextView = binding.titleTextView
+    private val subtitleTextView: TextView = binding.subtitleTextView
 
     private fun setIndexText(index: Int) {
         if (index > 0) {
