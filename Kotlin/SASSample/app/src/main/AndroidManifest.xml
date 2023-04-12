@@ -1,60 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.smartadserver.android.kotlinsample">
+    package="com.smartadserver.android.kotlinsample">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-            android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:roundIcon="@mipmap/ic_launcher_round"
-            android:supportsRtl="true"
-            android:theme="@style/AppTheme">
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
         <activity
             android:name="com.smartadserver.android.kotlinsample.MainActivity"
-            android:label="@string/title_activity_main_short"
-            android:exported="true">
+            android:exported="true"
+            android:label="@string/title_activity_main_short">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.smartadserver.android.kotlinsample.BannerActivity"
-                  android:label="@string/title_activity_banner"
-                  android:configChanges="screenSize|orientation" />
+        <activity
+            android:name="com.smartadserver.android.kotlinsample.BannerActivity"
+            android:configChanges="screenSize|orientation"
+            android:label="@string/title_activity_banner" />
 
-        <activity android:name="com.smartadserver.android.kotlinsample.InterstitialActivity"
-                  android:label="@string/title_activity_interstitial"
-                  android:configChanges="screenSize|orientation" />
+        <activity
+            android:name="com.smartadserver.android.kotlinsample.InterstitialActivity"
+            android:configChanges="screenSize|orientation"
+            android:label="@string/title_activity_interstitial" />
 
-        <activity android:name="com.smartadserver.android.kotlinsample.InAppBiddingBannerActivity"
-            android:label="@string/title_activity_inapp_bidding_banner"
-            android:configChanges="screenSize|orientation" />
+        <activity
+            android:name="com.smartadserver.android.kotlinsample.InAppBiddingBannerActivity"
+            android:configChanges="screenSize|orientation"
+            android:label="@string/title_activity_inapp_bidding_banner" />
 
-        <activity android:name="com.smartadserver.android.kotlinsample.InAppBiddingInterstitialActivity"
-            android:label="@string/title_activity_inapp_bidding_interstitial"
-            android:configChanges="screenSize|orientation" />
+        <activity
+            android:name="com.smartadserver.android.kotlinsample.InAppBiddingInterstitialActivity"
+            android:configChanges="screenSize|orientation"
+            android:label="@string/title_activity_inapp_bidding_interstitial" />
 
-        <activity android:name="com.smartadserver.android.kotlinsample.RewardedVideoActivity"
-                  android:label="@string/title_activity_interstitial"
-                  android:configChanges="screenSize|orientation" />
+        <activity
+            android:name="com.smartadserver.android.kotlinsample.RewardedVideoActivity"
+            android:configChanges="screenSize|orientation"
+            android:label="@string/title_activity_interstitial" />
 
-        <activity android:name="com.smartadserver.android.kotlinsample.RecyclerViewActivity"
-                  android:label="@string/title_activity_interstitial"
-                  android:configChanges="screenSize|orientation" />
+        <activity
+            android:name="com.smartadserver.android.kotlinsample.RecyclerViewActivity"
+            android:configChanges="screenSize|orientation"
+            android:label="@string/title_activity_interstitial" />
 
-        <activity android:name="com.smartadserver.android.kotlinsample.CoordinatorLayoutActivity"
-                  android:label="@string/title_activity_coordinator_layout"
-                  android:theme="@style/AppThemeNoActionBar"
-                  android:configChanges="screenSize|orientation" />
+        <activity
+            android:name="com.smartadserver.android.kotlinsample.CoordinatorLayoutActivity"
+            android:configChanges="screenSize|orientation"
+            android:label="@string/title_activity_coordinator_layout"
+            android:theme="@style/AppThemeNoActionBar" />
 
-        <activity android:name="com.smartadserver.android.kotlinsample.NativeAdActivity"
-                  android:label="@string/title_activity_native"
-                  android:theme="@style/AppThemeNoActionBar"
-                  android:configChanges="screenSize|orientation" />
+        <activity
+            android:name="com.smartadserver.android.kotlinsample.NativeAdActivity"
+            android:configChanges="screenSize|orientation"
+            android:label="@string/title_activity_native"
+            android:theme="@style/AppThemeNoActionBar" />
     </application>
 
 </manifest>
