@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    compileSdk 33
+    compileSdk 34
     defaultConfig {
         applicationId "com.smartadserver.android.sassample"
         minSdkVersion 19
-        targetSdkVersion 33
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -39,7 +39,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.5.0'
 
     // Smart Display SDK
-    implementation 'com.smartadserver.android:smart-display-sdk:7.23.0'
+    implementation 'com.smartadserver.android:smart-display-sdk:7.23.1'
 
     // to add Huawei support, uncomment the following line
     //implementation 'com.smartadserver.android:smart-core-sdk-huawei-support:2.0.0'
