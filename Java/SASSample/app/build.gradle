@@ -19,8 +19,8 @@ android {
     }
 
     compileOptions {
-        targetCompatibility = JavaVersion.VERSION_1_8
-        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_17
     }
 
 }
@@ -31,7 +31,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.5.0'
 
     // Smart Display SDK
-    implementation 'com.smartadserver.android:smart-display-sdk:7.23.1'
+    implementation 'com.smartadserver.android:smart-display-sdk:7.24.0'
 
     // to add Huawei support, uncomment the following line
     //implementation 'com.smartadserver.android:smart-core-sdk-huawei-support:2.0.0'
