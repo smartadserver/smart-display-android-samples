@@ -44,24 +44,23 @@
         <activity
             android:name="com.smartadserver.android.kotlinsample.RewardedVideoActivity"
             android:configChanges="screenSize|orientation"
-            android:label="@string/title_activity_interstitial" />
+            android:label="@string/title_activity_rewarded_video" />
 
         <activity
             android:name="com.smartadserver.android.kotlinsample.RecyclerViewActivity"
             android:configChanges="screenSize|orientation"
-            android:label="@string/title_activity_interstitial" />
+            android:label="@string/title_activity_recycler" />
 
         <activity
             android:name="com.smartadserver.android.kotlinsample.CoordinatorLayoutActivity"
             android:configChanges="screenSize|orientation"
             android:label="@string/title_activity_coordinator_layout"
-            android:theme="@style/AppThemeNoActionBar" />
+            android:theme="@style/AppThemeNoActionBar"/>
 
         <activity
             android:name="com.smartadserver.android.kotlinsample.NativeAdActivity"
             android:configChanges="screenSize|orientation"
-            android:label="@string/title_activity_native"
-            android:theme="@style/AppThemeNoActionBar" />
+            android:label="@string/title_activity_native" />
     </application>
 
 </manifest>

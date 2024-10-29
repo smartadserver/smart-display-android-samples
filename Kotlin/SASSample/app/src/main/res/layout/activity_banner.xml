@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:background="#FFFFFF">
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
     <com.smartadserver.android.library.ui.SASBannerView
         android:id="@+id/bannerView"
@@ -19,6 +19,7 @@
 
         <Button
             android:id="@+id/reloadButton"
+            android:layout_margin="40dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="10sp"

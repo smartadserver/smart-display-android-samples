@@ -2,8 +2,10 @@ package com.smartadserver.android.kotlinsample
 
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
 import com.smartadserver.android.kotlinsample.databinding.ActivityBannerBinding
 import com.smartadserver.android.library.model.SASAdElement
 import com.smartadserver.android.library.model.SASAdPlacement
@@ -23,6 +25,7 @@ class BannerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
 
         // Binding object to retrieve UI elements
         val binding = ActivityBannerBinding.inflate(layoutInflater)

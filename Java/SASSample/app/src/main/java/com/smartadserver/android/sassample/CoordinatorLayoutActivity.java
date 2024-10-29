@@ -4,10 +4,15 @@ import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.google.android.material.appbar.AppBarLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.OnApplyWindowInsetsListener;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -48,6 +53,33 @@ public class CoordinatorLayoutActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coordinator_layout);
+
+        EdgeToEdge.enable(this);
+
+        // apply edge-to-edge specific insets to preserve coordinator layout behavior compatible with
+        // transparent status bar
+        ViewCompat.setOnApplyWindowInsetsListener(
+                getWindow().getDecorView().getRootView(),
+                new OnApplyWindowInsetsListener() {
+                    @NonNull
+                    @Override
+                    public WindowInsetsCompat onApplyWindowInsets(@NonNull View v, @NonNull WindowInsetsCompat insets) {
+                        Insets cutoutInsets = insets.getInsets(WindowInsetsCompat.Type.displayCutout());
+                        Insets navBarInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
+                        Insets systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+                        boolean isLandscape = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+
+                        int leftInsets = cutoutInsets.left + navBarInsets.left + (isLandscape ? systemBarsInsets.left : 0);
+                        int topInsets = cutoutInsets.top + navBarInsets.top  + (isLandscape ? systemBarsInsets.top : 0);
+                        int rightInsets = cutoutInsets.right + navBarInsets.right  + (isLandscape ? systemBarsInsets.right : 0);
+                        int bottomInsets = cutoutInsets.bottom + navBarInsets.bottom +  + (isLandscape ? systemBarsInsets.bottom : 0);
+
+                        v.setPadding(leftInsets, topInsets, rightInsets, bottomInsets);
+
+                        return insets;
+                    }
+                }
+        );
 
         // Get UI objects
         recyclerView = findViewById(R.id.rv_list);

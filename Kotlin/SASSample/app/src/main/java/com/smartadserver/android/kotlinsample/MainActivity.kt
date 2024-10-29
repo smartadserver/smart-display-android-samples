@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.webkit.WebView
 import android.widget.ArrayAdapter
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
 import com.smartadserver.android.kotlinsample.databinding.ActivityMainBinding
 import com.smartadserver.android.library.util.SASConfiguration
 
@@ -14,6 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
 
         // Binding object to retrieve UI elements
         val binding = ActivityMainBinding.inflate(layoutInflater)

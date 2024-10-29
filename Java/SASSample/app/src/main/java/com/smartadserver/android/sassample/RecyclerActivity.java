@@ -4,6 +4,7 @@ import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -52,6 +53,8 @@ public class RecyclerActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler);
+
+        EdgeToEdge.enable(this);
 
         //Get UI Objects
         mRecyclerView = (RecyclerView) findViewById(R.id.activity_recycler_recycler_view);

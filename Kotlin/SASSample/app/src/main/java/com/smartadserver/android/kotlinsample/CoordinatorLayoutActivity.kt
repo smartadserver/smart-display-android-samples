@@ -1,11 +1,18 @@
 package com.smartadserver.android.kotlinsample
 
 import android.content.res.Configuration
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.setPadding
+import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -80,14 +87,32 @@ class CoordinatorLayoutActivity : AppCompatActivity() {
                 bannerViewHolderWrapper.bannerViewHolder = holder
             }
         }
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
 
         // set content view from binding
         setContentView(binding.root)
+
+        // apply edge-to-edge specific insets to preserve coordinator layout behavior compatible with
+        // transparent status bar
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
+
+            val cutoutInsets = insets.getInsets(WindowInsetsCompat.Type.displayCutout())
+            val navBarInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+            val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val isLandscape = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+
+            val leftInsets = cutoutInsets.left + navBarInsets.left + if (isLandscape) { systemBarsInsets.left } else { 0 }
+            val topInsets = cutoutInsets.top + navBarInsets.top + if (isLandscape) { systemBarsInsets.top } else { 0 }
+            val rightInsets = cutoutInsets.right + navBarInsets.right + if (isLandscape) { systemBarsInsets.right } else { 0 }
+            val bottomInsets = cutoutInsets.bottom + navBarInsets.bottom + if (isLandscape) { systemBarsInsets.bottom } else { 0 }
+
+            v.setPadding(leftInsets, topInsets, rightInsets, bottomInsets)
+            insets
+        }
 
         // Set up recycler view
         binding.recyclerView.run {

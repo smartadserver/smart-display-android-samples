@@ -4,7 +4,7 @@
     android:id="@+id/activity_recycler_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#FFFFFF">
+    android:fitsSystemWindows="true">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/activity_recycler_recycler_view"

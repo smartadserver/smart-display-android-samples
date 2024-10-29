@@ -1,6 +1,8 @@
 package com.smartadserver.android.sassample;
 
 import android.os.Bundle;
+
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -55,6 +57,9 @@ public class InAppBiddingInterstitialActivity extends AppCompatActivity implemen
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inapp_bidding_interstitial);
+
+
+        EdgeToEdge.enable(this);
 
         /*****************************************
          * Now perform Ad related code here

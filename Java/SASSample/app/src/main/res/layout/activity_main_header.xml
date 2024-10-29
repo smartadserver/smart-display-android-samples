@@ -13,7 +13,6 @@
         android:paddingEnd="10dp"
         android:gravity="start|center_vertical"
         android:text="@string/activity_main_headerText"
-        android:background="@color/listBackground"
         />
 
 </LinearLayout>
